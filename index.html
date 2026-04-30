@@ -243,10 +243,7 @@
       pointer-events: none;
     }
 
-    .hub-cta-inner {
-      position: relative;
-      z-index: 1;
-    }
+    .hub-cta-inner { position: relative; z-index: 1; }
 
     .hub-cta h2 {
       font-family: var(--serif);
@@ -296,10 +293,7 @@
       transform: translateY(-1px);
     }
 
-    .btn-spoke.primary {
-      background: var(--indigo);
-      border-color: var(--indigo);
-    }
+    .btn-spoke.primary { background: var(--indigo); border-color: var(--indigo); }
 
     .btn-spoke.primary:hover {
       background: var(--indigo-deep);
@@ -308,9 +302,33 @@
     }
 
     @media (max-width: 768px) {
-      .audience-grid { grid-template-columns: 1fr; }
-      .tier-grid { grid-template-columns: 1fr; }
+      .audience-grid   { grid-template-columns: 1fr; }
+      .tier-grid       { grid-template-columns: 1fr; }
       .hub-cta-buttons { flex-direction: column; align-items: stretch; text-align: center; }
+    }
+
+    /* ── GUIDE SECTION — this page only ──
+       #guide scopes these rules exclusively to the homepage split section.
+       adrian-cunanan-about.jpg: subject seated left of center in frame.
+       35% horizontal pulls frame left to center on subject.
+       20% vertical frames from upper body.
+       Height matches section height to prevent image overflow.
+       No other page uses id="guide" so no scope risk. */
+    #guide {
+      height: calc(100vh - var(--nav-h));
+    }
+
+    #guide .split-photo {
+      height: calc(100vh - var(--nav-h));
+      object-position: 85% 20%;
+    }
+
+    @media (max-width: 700px) {
+      #guide { height: auto; }
+      #guide .split-photo {
+        height: 60vh;
+        object-position: 85% 15%;
+      }
     }
 
   </style>
@@ -386,34 +404,8 @@
     </div>
   </section>
 
-  <!-- PROOF — Octavio testimonial after Guide.
-       Guide earns credibility first. Proof validates it.
-       Pull quote leads (fast scan), full quote follows (lean-in reader). -->
-  <section class="sec-warm sec-pad-sm">
-    <div class="wrap reveal">
-      <div style="border-left:3px solid var(--indigo);padding-left:28px;">
-        <span class="eyebrow">From Someone Who Has Been Through It</span>
-        <p style="font-family:var(--serif);font-style:italic;font-size:clamp(1.25rem,2.5vw,1.625rem);font-weight:300;color:var(--ink);line-height:1.45;max-width:620px;margin-bottom:20px;margin-top:0;">"For the first time, I had a system — not just ideas."</p>
-        <p style="font-size:0.9375rem;color:var(--ink-mid);line-height:1.75;max-width:600px;margin-bottom:24px;">I came into this with a landing page that needed real work and no clear brand strategy behind it. Adrian walked me through the entire process — a deep dive into how to essentially create my business from scratch. By the end I had a complete foundation I could actually build on, a professional visual identity, and a landing page generated directly from the work we did.</p>
-        <div style="display:flex;align-items:center;gap:14px;">
-          <img
-            src="assets/images/octavio-lorenzo.jpg"
-            alt="Octavio Lorenzo"
-            width="48"
-            height="48"
-            style="width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:1.5px solid var(--rule-warm);"
-          />
-          <div>
-            <span class="attr-name">Octavio Lorenzo</span>
-            <span class="attr-role">Certified Heroic Coach and Workshop Instructor, PMP, CSM</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- WHO IT SERVES -->
-  <section class="sec-white sec-pad" id="who">
+  <section class="sec-warm sec-pad" id="who">
     <div class="wrap reveal">
       <span class="eyebrow">Who It Serves</span>
       <h2>Three starting points.<br><em>One system.</em></h2>
@@ -467,6 +459,33 @@
           <h3>Signal Dojo Studio</h3>
           <p>Direct weekly 1:1 access to Adrian. Three month minimum. For those who want to move fast with a thinking partner who has been through it and built the system from the inside.</p>
           <span class="tier-tag">3-month minimum</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF — after System, before Final CTA.
+       Visitor has understood the product. Proof answers the last
+       objection before the close: "But does it actually work?"
+       Pull quote leads, full quote follows, photo matches coaches.html. -->
+  <section class="sec-white sec-pad-sm">
+    <div class="wrap reveal">
+      <div style="border-left:3px solid var(--indigo);padding-left:28px;">
+        <span class="eyebrow">From Someone Who Has Been Through It</span>
+        <p style="font-family:var(--serif);font-style:italic;font-size:clamp(1.25rem,2.5vw,1.625rem);font-weight:300;color:var(--ink);line-height:1.45;max-width:620px;margin-bottom:20px;margin-top:0;">"For the first time, I had a system — not just ideas."</p>
+        <p style="font-size:0.9375rem;color:var(--ink-mid);line-height:1.75;max-width:600px;margin-bottom:24px;">I came into this with a landing page that needed real work and no clear brand strategy behind it. Adrian walked me through the entire process — a deep dive into how to essentially create my business from scratch. By the end I had a complete foundation I could actually build on, a professional visual identity, and a landing page generated directly from the work we did.</p>
+        <div style="display:flex;align-items:center;gap:20px;">
+          <img
+            src="assets/images/octavio-lorenzo.jpg"
+            alt="Octavio Lorenzo"
+            width="80"
+            height="80"
+            style="width:80px;height:80px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:1.5px solid var(--rule-warm);"
+          />
+          <div>
+            <span class="attr-name">Octavio Lorenzo</span>
+            <span class="attr-role">Certified Heroic Coach and Workshop Instructor, PMP, CSM</span>
+          </div>
         </div>
       </div>
     </div>
