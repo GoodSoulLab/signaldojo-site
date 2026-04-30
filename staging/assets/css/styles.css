@@ -942,6 +942,8 @@ footer a:hover { color: rgba(255,255,255,0.7); }
   .nav-cta         { display: none; }
   nav              { padding: 16px var(--g); }
   .hero-h1         { font-size: clamp(1.875rem, 5.5vw, 4rem); }
+  /* DAY 0: Guide block collapses to single column on mobile */
+  .guide-hub-grid  { grid-template-columns: 1fr !important; }
 }
   position: fixed;
   top: var(--nav-h);
