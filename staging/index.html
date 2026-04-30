@@ -313,12 +313,24 @@
       .hub-cta-buttons { flex-direction: column; align-items: stretch; text-align: center; }
     }
 
-    /* Guide section photo — scoped to this page only.
-       adrian-cunanan-about.jpg: subject is center-left.
-       Shift frame left to show full figure, reduce background on right.
-       Does not affect split-photo on any other page. */
+    /* Guide section — scoped to index.html only.
+       Split section height accounts for fixed nav bar.
+       Image height matches section so no overflow.
+       object-position: 65% 20% shifts frame right to center on subject
+       and frames from upper body up. */
+    #guide {
+      height: calc(100vh - var(--nav-h));
+    }
     #guide .split-photo {
-      object-position: 30% 20%;
+      height: calc(100vh - var(--nav-h));
+      object-position: 65% 20%;
+    }
+    @media (max-width: 700px) {
+      #guide { height: auto; }
+      #guide .split-photo {
+        height: 60vh;
+        object-position: 65% 15%;
+      }
     }
 
   </style>
