@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Good Soul / Signal Dojo — Brand Position</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,600&family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --indigo:         #4A48C8;
+      --indigo-deep:    #2D2C8A;
+      --indigo-mid:     #6E6DD4;
+      --indigo-tint:    #EEEEF8;
+      --parchment:      #F7F5F0;
+      --parchment-mid:  #EDE9E0;
+      --sand:           #C9BFA8;
+      --ink:            #1A1A1A;
+      --ink-mid:        #4A4A4A;
+      --ink-light:      #7A7A7A;
+      --ink-ghost:      #A8A8A8;
+      --white:          #FFFFFF;
+      --rule-warm:      #E5E0D6;
+      --rule-cool:      #DDDDF0;
+      --serif: 'Fraunces', Georgia, serif;
+      --sans:  'Assistant', -apple-system, BlinkMacSystemFont, sans-serif;
+      --max:    1100px;
+      --gutter: clamp(1.5rem, 5vw, 4rem);
+    }
+
+    html { font-size: 100%; scroll-behavior: smooth; }
+    body {
+      background: var(--parchment);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: clamp(0.9375rem, 1.5vw, 1rem);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── SIDEBAR ── */
+    .ds-nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 220px;
+      height: 100vh;
+      background: var(--ink);
+      padding: 40px 24px;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .ds-nav-brand {
+      font-family: var(--serif);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+      line-height: 1.3;
+      text-decoration: none;
+      display: block;
+    }
+
+    .ds-nav-sub {
+      font-family: var(--sans);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 32px;
+    }
+
+    .ds-nav ul { list-style: none; }
+
+    .ds-nav-section {
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin: 24px 0 8px;
+    }
+
+    .ds-nav a {
+      display: block;
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      padding: 4px 0;
+      transition: color 160ms ease;
+    }
+    .ds-nav a:hover { color: var(--white); }
+    .ds-nav a.active { color: var(--white); }
+    .ds-nav-stub { opacity: 0.45 !important; font-style: italic; }
+
+    /* ── MAIN ── */
+    .ds-main { margin-left: 220px; min-height: 100vh; }
+
+    .ds-wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    /* ── COVER ── */
+    .ds-cover {
+      background: var(--ink);
+      padding: 96px var(--gutter) 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ds-cover::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -80px;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,72,200,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .ds-cover-label {
+      font-family: var(--sans);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .ds-cover h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 16px;
+      max-width: 700px;
+    }
+
+    .ds-cover h1 em {
+      font-style: italic;
+      color: var(--indigo-mid);
+    }
+
+    .ds-cover-desc {
+      font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+      color: rgba(255,255,255,0.5);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .ds-cover-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .ds-cover-meta-item {
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .ds-cover-meta-item strong {
+      display: block;
+      color: rgba(255,255,255,0.75);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    /* ── SECTIONS ── */
+    .sec { padding: 72px 0; border-bottom: 1px solid var(--rule-warm); }
+    .sec:last-child { border-bottom: none; }
+    .sec.warm { background: var(--parchment); }
+    .sec.white { background: var(--white); }
+    .sec.cool { background: var(--indigo-tint); }
+    .sec.dark { background: var(--ink); }
+
+    .sec-label {
+      font-family: var(--sans);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--indigo-mid);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .sec.dark .sec-label { color: var(--sand); }
+    .sec.cool .sec-label { color: var(--indigo-deep); }
+
+    .sec h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .sec.dark h2 { color: var(--white); }
+
+    .sec-desc {
+      font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+      color: var(--ink-mid);
+      max-width: 640px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    .sec.dark .sec-desc { color: rgba(255,255,255,0.55); }
+
+    /* ── STATEMENT BLOCK ── */
+    .statement {
+      font-family: var(--serif);
+      font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.5;
+      max-width: 680px;
+      border-left: 3px solid var(--indigo);
+      padding-left: 28px;
+      margin-bottom: 48px;
+    }
+
+    /* ── DEFINITION GRID ── */
+    .def-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 32px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .def-card {
+      padding: 36px 32px;
+    }
+
+    .def-card.warm-card { background: var(--parchment-mid); }
+    .def-card.white-card { background: var(--white); }
+    .def-card.indigo-card { background: var(--indigo); }
+    .def-card.tint-card { background: var(--indigo-tint); }
+
+    .def-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .def-card.indigo-card .def-label { color: rgba(255,255,255,0.55); }
+    .def-card.tint-card .def-label { color: var(--indigo-mid); }
+
+    .def-card p {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 1.6vw, 1.125rem);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    .def-card.indigo-card p { color: rgba(255,255,255,0.9); }
+
+    /* ── TENSION ROW ── */
+    .tension-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 32px 36px;
+      background: var(--parchment-mid);
+      border-radius: 14px;
+      margin-bottom: 16px;
+    }
+
+    .tension-word {
+      font-family: var(--serif);
+      font-size: clamp(1.125rem, 2vw, 1.375rem);
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .tension-bridge {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--indigo-mid);
+    }
+
+    /* ── EMOTIONAL CONTRACT ── */
+    .contract-row {
+      display: flex;
+      gap: 0;
+      margin-bottom: 32px;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .contract-step {
+      flex: 1;
+      padding: 28px 24px;
+      position: relative;
+    }
+
+    .contract-step:nth-child(1) { background: var(--parchment-mid); }
+    .contract-step:nth-child(2) { background: var(--indigo-tint); }
+    .contract-step:nth-child(3) { background: var(--indigo); }
+
+    .contract-num {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--indigo-mid);
+      line-height: 1;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .contract-step:nth-child(3) .contract-num { color: rgba(255,255,255,0.4); }
+
+    .contract-word {
+      font-family: var(--serif);
+      font-size: clamp(1.125rem, 2vw, 1.375rem);
+      font-weight: 600;
+      color: var(--ink);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .contract-step:nth-child(3) .contract-word { color: var(--white); }
+
+    .contract-note {
+      font-size: 0.8125rem;
+      color: var(--ink-light);
+      line-height: 1.5;
+    }
+
+    .contract-step:nth-child(3) .contract-note { color: rgba(255,255,255,0.6); }
+
+    /* ── NEVER LIST ── */
+    .never-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .never-list li {
+      background: var(--white);
+      border: 1.5px solid var(--rule-warm);
+      border-radius: 10px;
+      padding: 18px 20px;
+      font-size: 0.9375rem;
+      color: var(--ink-mid);
+      line-height: 1.5;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .never-icon {
+      font-size: 0.875rem;
+      color: var(--indigo-mid);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── ONE SENTENCE ── */
+    .one-sentence {
+      padding: 48px 0;
+      text-align: center;
+    }
+
+    .one-sentence p {
+      font-family: var(--serif);
+      font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .one-sentence p em {
+      font-style: normal;
+      color: var(--indigo-mid);
+    }
+
+    /* ── FOUNDER INPUTS ── */
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .founder-card {
+      background: var(--white);
+      border: 1.5px solid var(--rule-warm);
+      border-radius: 14px;
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .founder-q-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--indigo-mid);
+      line-height: 1;
+    }
+
+    .founder-q {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .founder-a {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 1.6vw, 1.125rem);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    .founder-note {
+      font-size: 0.8125rem;
+      color: var(--ink-light);
+      margin-top: 10px;
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    /* ── FILTER NOTE ── */
+    .filter-note {
+      background: rgba(74,72,200,0.07);
+      border: 1.5px solid rgba(74,72,200,0.15);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-top: 32px;
+    }
+
+    .filter-note p {
+      font-size: 0.9375rem;
+      color: var(--ink-mid);
+      line-height: 1.65;
+    }
+
+    .filter-note strong { color: var(--ink); font-weight: 700; }
+
+    @media (max-width: 860px) {
+      .ds-nav { display: none; }
+      .ds-main { margin-left: 0; }
+      .def-grid,
+      .never-list { grid-template-columns: 1fr; }
+      .contract-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <nav class="ds-nav">
+    <a href="index.html" class="ds-nav-brand">Good Soul<br>Signal Dojo</a>
+    <div class="ds-nav-sub">Design Reference</div>
+    <ul>
+      <li class="ds-nav-section">Live</li>
+      <li><a href="index.html" class="active">Brand Position ←</a></li>
+      <li><a href="directions.html">Directions &amp; Decisions</a></li>
+      <li><a href="design-system.html">Design System</a></li>
+
+      <li class="ds-nav-section">In Development</li>
+      <li><a href="messaging.html" class="ds-nav-stub">Messaging Architecture</a></li>
+      <li><a href="voice.html" class="ds-nav-stub">Voice &amp; Tone</a></li>
+      <li><a href="content-system.html" class="ds-nav-stub">Content System Map</a></li>
+      <li><a href="messaging-reference.html" class="ds-nav-stub">Messaging Reference</a></li>
+      <li><a href="competitive.html" class="ds-nav-stub">Competitive Landscape</a></li>
+      <li><a href="product-architecture.html" class="ds-nav-stub">Product Architecture</a></li>
+
+      <li class="ds-nav-section">On This Page</li>
+      <li><a href="#inputs">Founder Inputs</a></li>
+      <li><a href="#what-is">What This Brand Is</a></li>
+      <li><a href="#what-not">What It Is Not</a></li>
+      <li><a href="#feels-like">What It Feels Like</a></li>
+      <li><a href="#contract">Emotional Contract</a></li>
+      <li><a href="#tension">The Tension</a></li>
+      <li><a href="#never">What It Must Never Produce</a></li>
+      <li><a href="#sentence">One Sentence</a></li>
+    </ul>
+  </nav>
+
+  <main class="ds-main">
+
+    <!-- COVER -->
+    <div class="ds-cover">
+      <span class="ds-cover-label">Brand Position Document · April 2026</span>
+      <h1>The <em>filter</em> for every<br>design decision.</h1>
+      <p class="ds-cover-desc">This document precedes the design system. When a design decision is unclear, return here first. If an answer exists in this document, the design system is the implementation. If it does not, a decision needs to be made before building continues.</p>
+      <div class="ds-cover-meta">
+        <div class="ds-cover-meta-item"><strong>Brand</strong>Good Soul / Signal Dojo</div>
+        <div class="ds-cover-meta-item"><strong>Author</strong>Adrian Cunanan</div>
+        <div class="ds-cover-meta-item"><strong>Status</strong>Locked — April 2026</div>
+        <div class="ds-cover-meta-item"><strong>Update Trigger</strong>Only when the core thesis changes</div>
+      </div>
+    </div>
+
+    <!-- FOUNDER INPUTS -->
+    <section class="sec warm" id="inputs">
+      <div class="ds-wrap">
+        <span class="sec-label">Source Material</span>
+        <h2>Founder Inputs</h2>
+        <p class="sec-desc">The brand position document was built from three direct questions answered by the founder before any visual decision was made. These answers are the ground truth. The document is their synthesis, not a replacement for them.</p>
+
+        <div class="founder-grid">
+          <div class="founder-card">
+            <span class="founder-q-num">1</span>
+            <div>
+              <span class="founder-q">When the person who needs Signal Dojo Core lands on the page, what do you want them to feel in the first three seconds? Not think. Feel.</span>
+              <p class="founder-a">Safe. Heard. Felt. Seen. With an aim to feel Calm, Confident, and Connected.</p>
+              <p class="founder-note">Note the sequence. Safety precedes confidence. This is not conventional for a business launch product. It is the correct sequence for this audience and this brand. Every touchpoint must honor this order.</p>
+            </div>
+          </div>
+          <div class="founder-card">
+            <span class="founder-q-num">2</span>
+            <div>
+              <span class="founder-q">If Good Soul / Signal Dojo were a physical object or space, what would it be?</span>
+              <p class="founder-a">Japandi style minimalist training space in the middle of a metropolitan area. Capable of X-Men Danger Room training for coaches, consultants, and founders. Can also have the feeling of the Fortress of Solitude when that vibe is needed.</p>
+              <p class="founder-note">Three modes held simultaneously: stillness inside intensity (Japandi urban), demanding adaptive precision (Danger Room), and deep solitary depth (Fortress of Solitude). The brand must be capable of all three without feeling inconsistent. This is range, not contradiction.</p>
+            </div>
+          </div>
+          <div class="founder-card">
+            <span class="founder-q-num">3</span>
+            <div>
+              <span class="founder-q">What does this brand absolutely must never feel like? One or two words.</span>
+              <p class="founder-a">Robotic. Corporate.</p>
+              <p class="founder-note">Both words point to the same fear: loss of self. Becoming a function rather than a person. Being processed rather than met. This constraint is not aesthetic — it is relational. Any design decision that makes a person feel like one of many is out of brand regardless of visual consistency.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT IT IS -->
+    <section class="sec white" id="what-is">
+      <div class="ds-wrap">
+        <span class="sec-label">Definition</span>
+        <h2>What This Brand Is</h2>
+        <p class="sec-desc">One paragraph. This is the affirmative statement. Everything in the design system is in service of producing this felt experience.</p>
+
+        <div class="statement">
+          A precision training environment for people who have done the inner work and are ready for the outer architecture. Warm enough to make you feel found. Rigorous enough to make the work real.
+        </div>
+
+        <div class="def-grid">
+          <div class="def-card warm-card">
+            <span class="def-label">Precision Training Environment</span>
+            <p>Not a course. Not a community. Not a content platform. A space built for a specific kind of work, with the tools and structure to do it at a level that produces real outcomes.</p>
+          </div>
+          <div class="def-card tint-card">
+            <span class="def-label">Done the Inner Work</span>
+            <p>The audience is not beginning their development journey. They are veterans of it. The brand meets them at the next threshold — where inner competency meets outer architecture.</p>
+          </div>
+          <div class="def-card white-card">
+            <span class="def-label">Warm Enough to Feel Found</span>
+            <p>Safety before capability. The person feels recognized before anything is asked of them. This warmth is not decoration — it is the entry condition for real work to begin.</p>
+          </div>
+          <div class="def-card indigo-card">
+            <span class="def-label">Rigorous Enough to Make the Work Real</span>
+            <p>The warmth does not soften the standard. This is a Danger Room, not a retreat. The training is demanding because the outcomes are real. Gentleness and rigor are not opposites here.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT IT IS NOT -->
+    <section class="sec cool" id="what-not">
+      <div class="ds-wrap">
+        <span class="sec-label">Boundary</span>
+        <h2>What This Brand Is Not</h2>
+        <p class="sec-desc">Constraints are as generative as definitions. These are not competitive positioning statements. They are identity boundaries. Crossing them does not produce a different version of this brand — it produces a different brand.</p>
+
+        <ul class="never-list">
+          <li>
+            <span class="never-icon">✕</span>
+            <span><strong>A productivity system.</strong> Productivity assumes the person knows where to go and needs help moving faster. This brand addresses a prior question: what to build, for whom, and why it matters.</span>
+          </li>
+          <li>
+            <span class="never-icon">✕</span>
+            <span><strong>A motivational platform.</strong> Motivation is not the problem this brand solves. The audience is not lacking drive. They are lacking a working system. Motivational language is both inaccurate and off-brand.</span>
+          </li>
+          <li>
+            <span class="never-icon">✕</span>
+            <span><strong>A place that treats you as a conversion metric.</strong> Every design pattern that optimizes for throughput at the expense of the felt individual experience is out of brand. Urgency manufacturing. Countdown timers. Artificial scarcity. None of these.</span>
+          </li>
+          <li>
+            <span class="never-icon">✕</span>
+            <span><strong>A persona to be optimized.</strong> The brand works with whole people, not profiles. Segmentation language in copy or design that reduces a person to their job title or certification status breaks the relational contract.</span>
+          </li>
+          <li>
+            <span class="never-icon">✕</span>
+            <span><strong>Robotic.</strong> Anything that feels automated, templated, or algorithmically generated in its human expression is out of brand. This includes copy patterns, email sequences, and visual systems that feel mass-produced.</span>
+          </li>
+          <li>
+            <span class="never-icon">✕</span>
+            <span><strong>Corporate.</strong> Hierarchy, gatekeeping, and the implied power differential of an institution looking down at a customer are out of brand. The relationship is peer-to-peer. Further along, not higher up.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FEELS LIKE -->
+    <section class="sec warm" id="feels-like">
+      <div class="ds-wrap">
+        <span class="sec-label">Felt Experience</span>
+        <h2>What It Feels Like</h2>
+        <p class="sec-desc">This section describes the phenomenology of encountering the brand — what the person experiences before they read a word of copy or make a single decision. Design produces this experience or it does not.</p>
+
+        <div class="statement">
+          Walking into a space that was built for exactly this kind of work. Quiet. Capable. Alive. The kind of stillness that is not empty but loaded. You feel seen before anything is asked of you. Then the training begins.
+        </div>
+
+        <div class="def-grid">
+          <div class="def-card warm-card">
+            <span class="def-label">Quiet</span>
+            <p>Not silent. Not sparse. The absence of noise that competes for attention. White space is active, not decorative. Type earns its place. Nothing announces itself.</p>
+          </div>
+          <div class="def-card white-card">
+            <span class="def-label">Capable</span>
+            <p>The space communicates structural confidence. The person arrives knowing this was built by someone who has done this before and built the tool from inside the problem.</p>
+          </div>
+          <div class="def-card tint-card">
+            <span class="def-label">Alive</span>
+            <p>Not sterile. Not museum-like. The stillness has energy in it. The Japandi reference: a training space in a metropolitan area. Calm because disciplined, not because inert.</p>
+          </div>
+          <div class="def-card indigo-card">
+            <span class="def-label">Loaded Stillness</span>
+            <p>The most important quality and the hardest to produce in design. Stillness that contains potential. Negative space that feels intentional, not absent. This is what separates the Fortress of Solitude from an empty room.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EMOTIONAL CONTRACT -->
+    <section class="sec white" id="contract">
+      <div class="ds-wrap">
+        <span class="sec-label">Non-Negotiable Sequence</span>
+        <h2>The Emotional Contract</h2>
+        <p class="sec-desc">The sequence matters as much as the elements. This brand does not lead with confidence or aspiration. It leads with recognition. The person feels found before they feel capable. This ordering is non-negotiable across every touchpoint.</p>
+
+        <div class="contract-row">
+          <div class="contract-step">
+            <span class="contract-num">1</span>
+            <span class="contract-word">Safe</span>
+            <p class="contract-note">The first felt experience. The person arrives and feels the space is not going to harm them, rush them, or judge them. This is the entry condition for everything else.</p>
+          </div>
+          <div class="contract-step">
+            <span class="contract-num">2</span>
+            <span class="contract-word">Heard</span>
+            <p class="contract-note">The brand names their experience precisely. Not in general terms. In the specific language of what it actually feels like to be them right now. Recognition precedes invitation.</p>
+          </div>
+          <div class="contract-step">
+            <span class="contract-num">3</span>
+            <span class="contract-word">Capable</span>
+            <p class="contract-note">Confidence is the outcome, not the entry point. The person arrives at capability through feeling safe and heard first. Reverse this sequence and the brand loses them.</p>
+          </div>
+        </div>
+
+        <div class="filter-note">
+          <p><strong>Design implication:</strong> Every section of the landing page must be evaluated against this sequence. Problem sections must feel like recognition, not accusation. Diagnosis sections must feel like clarity, not judgment. The offer must feel like an honest invitation, not a sales event. If any section breaks the emotional contract, the conversion logic collapses regardless of how well the copy or design performs in isolation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE TENSION -->
+    <section class="sec cool" id="tension">
+      <div class="ds-wrap">
+        <span class="sec-label">Core Identity</span>
+        <h2>The Tension This Brand Inhabits</h2>
+        <p class="sec-desc">The brand does not resolve these tensions. It inhabits them. Design that flattens one side at the expense of the other is out of brand. Both must be present and in genuine dialogue at every major touchpoint.</p>
+
+        <div class="tension-row" style="margin-bottom:12px;">
+          <span class="tension-word">Inner</span>
+          <span class="tension-bridge">↔ inhabits ↔</span>
+          <span class="tension-word">Outer</span>
+          <span style="flex:1;font-size:0.875rem;color:var(--ink-light);padding-left:16px;">The core thesis. Self-trust and action develop together. The inner work does not precede the outer work — it runs alongside it.</span>
+        </div>
+
+        <div class="tension-row" style="margin-bottom:12px;">
+          <span class="tension-word">Soul</span>
+          <span class="tension-bridge">↔ inhabits ↔</span>
+          <span class="tension-word">Signal</span>
+          <span style="flex:1;font-size:0.875rem;color:var(--ink-light);padding-left:16px;">The brand name holds this directly. Good Soul is the parent. Signal Dojo is the applied layer. Both must be visible in the design language.</span>
+        </div>
+
+        <div class="tension-row" style="margin-bottom:12px;">
+          <span class="tension-word">Stillness</span>
+          <span class="tension-bridge">↔ inhabits ↔</span>
+          <span class="tension-word">Precision</span>
+          <span style="flex:1;font-size:0.875rem;color:var(--ink-light);padding-left:16px;">The Japandi dojo and the Danger Room. The Fortress of Solitude and the operating system. Both in the same space without contradiction.</span>
+        </div>
+
+        <div class="tension-row">
+          <span class="tension-word">Warm</span>
+          <span class="tension-bridge">↔ inhabits ↔</span>
+          <span class="tension-word">Rigorous</span>
+          <span style="flex:1;font-size:0.875rem;color:var(--ink-light);padding-left:16px;">The parchment surfaces and the indigo precision. The Fraunces serif and the Assistant sans. The two-register system is a direct expression of this tension.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEVER -->
+    <section class="sec warm" id="never">
+      <div class="ds-wrap">
+        <span class="sec-label">Protection</span>
+        <h2>What This Brand Must Never Produce</h2>
+        <p class="sec-desc">The founding answer was two words: Robotic. Corporate. These translate into specific felt experiences to actively avoid at every touchpoint.</p>
+
+        <ul class="never-list" style="grid-template-columns:1fr;">
+          <li>
+            <span class="never-icon">◆</span>
+            <span><strong>The feeling of being processed.</strong> The person must always feel met as an individual, not handled as a member of a segment. This applies to copy, to design patterns, and to the cadence of any automated communication.</span>
+          </li>
+          <li>
+            <span class="never-icon">◆</span>
+            <span><strong>The feeling of being one of many.</strong> Even at scale, the brand must create the impression of individual attention. This is a craft problem, not a technology problem.</span>
+          </li>
+          <li>
+            <span class="never-icon">◆</span>
+            <span><strong>The feeling of being handed a framework and left alone with it.</strong> The system is the companion, not the replacement for the relationship. Any design that makes the product feel like a document delivery mechanism is out of brand.</span>
+          </li>
+          <li>
+            <span class="never-icon">◆</span>
+            <span><strong>Performed urgency.</strong> Countdown timers, artificial scarcity language, and urgency manufactured outside of real conditions (genuine founding member caps, genuine launch windows) are out of brand. If urgency exists, it must be real and stated plainly.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ONE SENTENCE -->
+    <section class="sec dark" id="sentence">
+      <div class="ds-wrap">
+        <div class="one-sentence">
+          <span class="sec-label" style="color:var(--sand);display:block;margin-bottom:24px;">The Brand in One Sentence</span>
+          <p>Good Soul is where the <em>inner work</em> meets the outer system, in a space built to hold both.</p>
+        </div>
+
+        <div style="padding-top:48px;border-top:1px solid rgba(255,255,255,0.1);">
+          <p style="font-size:0.8125rem;color:rgba(255,255,255,0.35);margin-bottom:8px;">How to use this document</p>
+          <p style="font-size:0.9375rem;color:rgba(255,255,255,0.6);line-height:1.7;max-width:600px;">When a design, copy, or product decision is unclear, return to this document before the design system. The design system answers how. This document answers why. If the why is not clear, the how will produce the wrong result.</p>
+          <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);">
+          <a href="directions.html" style="font-size:0.875rem;color:rgba(255,255,255,0.5);text-decoration:none;">Directions &amp; Decisions →</a>
+          <a href="design-system.html" style="font-size:0.875rem;color:rgba(255,255,255,0.5);text-decoration:none;">Design System →</a>
+        </div>
+        <p style="font-size:0.75rem;color:rgba(255,255,255,0.25);margin-top:16px;">Brand Position Document · Good Soul / Signal Dojo · Adrian Cunanan · April 2026</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

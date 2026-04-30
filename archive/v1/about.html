@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Adrian Cunanan / Good Soul / Signal Dojo</title>
+  <meta name="description" content="I have been studying one problem for 14 years. The gap between who you are capable of being and who you are actually being." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,200;1,9..144,300;1,9..144,400;1,9..144,600&family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=7" />
+  <style>
+
+    .about-hero {
+      background: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-hero-bg {
+      position: absolute; inset: 0;
+      background-image: url("assets/images/adrian-cunanan-about.jpg");
+      background-size: cover;
+      background-position: 35% 30%;
+      opacity: 0;
+      animation: fadeIn 1.4s ease 0.4s forwards;
+    }
+
+    .about-hero-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to top, rgba(26,26,26,0.95) 0%, rgba(26,26,26,0.55) 35%, rgba(26,26,26,0.1) 65%, transparent 100%),
+        linear-gradient(to bottom, rgba(26,26,26,0.4) 0%, transparent 20%);
+      pointer-events: none;
+    }
+
+    .about-hero-content {
+      max-width: var(--max);
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      padding: 140px var(--g) 88px;
+    }
+
+    .about-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--white);
+      margin-bottom: 24px;
+      max-width: 720px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+
+    .about-hero h1 em { font-style: italic; font-weight: 400; color: var(--indigo-mid); }
+
+    .about-hero-sub {
+      font-family: var(--sans);
+      font-size: clamp(1rem, 1.5vw, 1.125rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      max-width: 500px;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.7s forwards;
+    }
+
+    .story-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 var(--g);
+    }
+
+    .story-p {
+      font-size: clamp(1rem, 1.6vw, 1.125rem);
+      color: var(--ink-mid);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .story-gap { margin-bottom: 40px; }
+
+    .pull-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.125rem, 2.2vw, 1.5rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.55;
+      border-left: 3px solid var(--indigo);
+      padding-left: 24px;
+      margin: 36px 0;
+    }
+
+    .goodsoul-block {
+      background: var(--ink);
+      padding: 96px var(--g);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .goodsoul-block::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: -60px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,72,200,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .goodsoul-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .goodsoul-heading {
+      font-family: var(--serif);
+      font-size: clamp(1.875rem, 4vw, 2.75rem);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+    }
+
+    .goodsoul-heading em { font-style: italic; font-weight: 400; color: var(--indigo-mid); }
+
+    .goodsoul-body p {
+      font-size: clamp(1rem, 1.5vw, 1.125rem);
+      color: rgba(255,255,255,0.92);
+      max-width: 560px;
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    .goodsoul-body p:last-child { margin-bottom: 0; }
+
+    .about-cta {
+      background: var(--parchment-mid);
+      padding: 80px var(--g);
+      text-align: center;
+    }
+
+    .about-cta h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .about-cta h2 em { font-style: italic; font-weight: 400; color: var(--indigo); }
+
+    .about-cta p {
+      font-size: clamp(1rem, 1.5vw, 1.125rem);
+      color: var(--ink-mid);
+      max-width: 480px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    @media (max-width: 700px) {
+      .about-hero-bg { background-position: 30% 20%; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="https://signaldojo.com" class="nav-brand">Signal Dojo</a>
+    <div style="display:flex;align-items:center;gap:32px;">
+      <a href="https://signaldojo.com/about" style="font-family:var(--sans);font-size:0.875rem;font-weight:600;color:rgba(255,255,255,1);text-decoration:none;">About</a>
+      <a href="https://stan.store/signaldojo/p/signal-dojo-core" class="nav-cta">Get Access</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="about-hero">
+    <div class="about-hero-bg"></div>
+    <div class="about-hero-overlay"></div>
+    <div class="about-hero-content">
+      <span class="eyebrow" style="color:var(--sand);">About</span>
+      <h1>I have been studying<br>one problem for<br><em>14 years.</em></h1>
+      <p class="about-hero-sub">The gap between who you are capable of being and who you are actually being.</p>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="sec-white sec-pad">
+    <div class="story-wrap reveal">
+
+      <p class="story-p">For a decade I built products in digital health and mental healthcare designed to change behavior at scale. I learned something most systems miss: the gap is not a knowledge problem. People are not missing information. They are missing a working system for converting what they know into how they consistently show up.</p>
+
+      <p class="story-p story-gap">I kept solving it for companies. The gap kept showing up in the people building them.</p>
+
+      <div class="pull-quote">Then it showed up in me.</div>
+
+      <p class="story-p">I went through a long pattern of rupture and return. Each time I came back with more awareness. Each time the coping mechanisms that had carried me got more brittle. The last episode was the longest. It forced the deepest work. What I found underneath was a root I had not fully named: performance-based self-worth and the things I had made unspeakable.</p>
+
+      <p class="story-p story-gap">That work changed everything I thought I knew about sustainable performance.</p>
+
+      <div class="pull-quote">Self-trust is not a feeling you wait for. It is built through action.</div>
+
+      <p class="story-p">Identity shifts when the body is included, not just the mind. Sustainable contribution is built from the inside out, identity first, then strategy, then output.</p>
+
+      <p class="story-p">I pursued the Heroic coaching certification and workshop instructor program not to add letters after my name but because I needed the framework and the community. I know this world from the inside.</p>
+
+      <p class="story-p story-gap">I built Signal Dojo because I needed it myself. The same operating system I used to build and ship products at startups and health companies, applied to the one product most coaches, consultants, and founders never build systematically: themselves.</p>
+
+      <div class="pull-quote">Ship. Measure. Learn. Decide. Repeat.</div>
+
+    </div>
+  </section>
+
+  <!-- GOOD SOUL -->
+  <div class="goodsoul-block reveal">
+    <div class="goodsoul-inner">
+      <span class="eyebrow" style="color:var(--sand);display:block;margin-bottom:24px;">Good Soul</span>
+      <h2 class="goodsoul-heading">Where Science<br>Meets <em>Soul.</em></h2>
+      <div class="goodsoul-body">
+        <p>A human development movement for the age of intelligent machines.</p>
+        <p>The thesis is simple. The age of intelligent machines does not make human development less important. It makes it more urgent. As automation handles more of what we produce, what we are becomes the differentiator.</p>
+        <p>Good Soul exists to close the gap between knowing and being. Between insight and embodiment. Between who you are and how you show up.</p>
+        <p>Signal Dojo is its first operational layer.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="about-cta reveal">
+    <span class="eyebrow" style="display:block;margin-bottom:16px;color:var(--indigo-mid);">Ready</span>
+    <h2>Start with the <em>foundation.</em></h2>
+    <p>Signal Dojo Core is where everyone begins. Build your strategy, your avatar, your offer, and your landing page. In one system.</p>
+    <a href="https://stan.store/signaldojo/p/signal-dojo-core" class="btn-primary" style="background:var(--indigo);color:var(--white);">Get Access to Signal Dojo Core</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 Adrian Cunanan / Good Soul. All rights reserved.</span>
+    <a href="https://goodsoul.ai">goodsoul.ai</a>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

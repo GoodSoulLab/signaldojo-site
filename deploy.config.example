@@ -1,0 +1,12 @@
+# Copy this file to deploy.config and fill in your DreamHost details.
+# deploy.config is ignored by default and should not be committed.
+
+# SSH user/host used for both targets.
+SSH_TARGET="username@your-dreamhost-server"
+
+# Absolute remote paths on DreamHost.
+PROD_REMOTE_DIR="/home/username/example.com/"
+STAGING_REMOTE_DIR="/home/username/staging.example.com/"
+
+# Optional: set to a non-default SSH port if needed.
+# SSH_PORT="22"

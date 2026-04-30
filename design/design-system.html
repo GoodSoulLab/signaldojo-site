@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Good Soul / Signal Dojo — Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,600&family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* ── PALETTE ── */
+      /* Primary — Deep Indigo */
+      --indigo:         #4A48C8;   /* Primary brand. Warmed from original violet. */
+      --indigo-deep:    #2D2C8A;   /* Pressed states, headings on tint */
+      --indigo-mid:     #6E6DD4;   /* Secondary accents, icons */
+      --indigo-tint:    #EEEEF8;   /* Subtle section background — cool register */
+
+      /* Warm Neutrals — the Japandi layer */
+      --parchment:      #F7F5F0;   /* Primary warm surface. Inner foundation register. */
+      --parchment-mid:  #EDE9E0;   /* Dividers, card borders in warm register */
+      --sand:           #C9BFA8;   /* Muted accent, labels in warm register */
+
+      /* Ink */
+      --ink:            #1A1A1A;   /* Primary text — warm near-black, not pure */
+      --ink-mid:        #4A4A4A;   /* Body text */
+      --ink-light:      #7A7A7A;   /* Captions, labels, meta */
+      --ink-ghost:      #A8A8A8;   /* Disabled, placeholders */
+
+      /* Surface */
+      --white:          #FFFFFF;
+      --rule-warm:      #E5E0D6;   /* Warm register dividers */
+      --rule-cool:      #DDDDF0;   /* Cool register dividers */
+
+      /* ── TYPOGRAPHY ── */
+      --serif: 'Fraunces', Georgia, serif;
+      --sans:  'Assistant', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* ── LAYOUT ── */
+      --max:    1100px;
+      --col:    680px;
+      --gutter: clamp(1.5rem, 5vw, 4rem);
+    }
+
+    html { font-size: 100%; scroll-behavior: smooth; }
+    body {
+      background: var(--parchment);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: clamp(0.9375rem, 1.5vw, 1rem);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── DOC LAYOUT ── */
+    .ds-wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    /* ── NAV / SIDEBAR ── */
+    .ds-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 220px;
+      height: 100vh;
+      background: var(--ink);
+      padding: 40px 24px;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .ds-nav-brand {
+      font-family: var(--serif);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .ds-nav-sub {
+      font-family: var(--sans);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 32px;
+    }
+
+    .ds-nav ul { list-style: none; }
+
+    .ds-nav-section {
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin: 24px 0 8px;
+    }
+
+    .ds-nav a {
+      display: block;
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      padding: 4px 0;
+      transition: color 160ms ease;
+    }
+    .ds-nav a:hover { color: var(--white); }
+
+    /* ── MAIN ── */
+    .ds-main {
+      margin-left: 220px;
+      min-height: 100vh;
+    }
+
+    /* ── SECTION ── */
+    .ds-section {
+      padding: 72px var(--gutter);
+      border-bottom: 1px solid var(--rule-warm);
+    }
+
+    .ds-section:last-child { border-bottom: none; }
+
+    /* Alternating register */
+    .ds-section.warm { background: var(--parchment); }
+    .ds-section.white { background: var(--white); }
+    .ds-section.cool { background: var(--indigo-tint); }
+    .ds-section.dark { background: var(--ink); }
+
+    /* ── SECTION HEADER ── */
+    .ds-section-label {
+      font-family: var(--sans);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--indigo-mid);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .ds-section.dark .ds-section-label { color: var(--sand); }
+
+    .ds-section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .ds-section.dark .ds-section-title { color: var(--white); }
+
+    .ds-section-desc {
+      font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+      color: var(--ink-mid);
+      max-width: 640px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    .ds-section.dark .ds-section-desc { color: rgba(255,255,255,0.6); }
+
+    /* ── COVER ── */
+    .ds-cover {
+      background: var(--ink);
+      padding: 96px var(--gutter) 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ds-cover::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,72,200,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .ds-cover-label {
+      font-family: var(--sans);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .ds-cover h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 24px;
+      max-width: 700px;
+    }
+
+    .ds-cover h1 em {
+      font-style: italic;
+      color: var(--indigo-mid);
+    }
+
+    .ds-cover-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .ds-cover-meta-item {
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .ds-cover-meta-item strong {
+      display: block;
+      color: rgba(255,255,255,0.8);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    /* ── BRAND POSITION ── */
+    .bp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .bp-card {
+      background: var(--white);
+      border: 1.5px solid var(--rule-warm);
+      border-radius: 12px;
+      padding: 28px 24px;
+    }
+
+    .bp-card.accent {
+      background: var(--indigo);
+      border-color: var(--indigo);
+    }
+
+    .bp-card-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .bp-card.accent .bp-card-label { color: rgba(255,255,255,0.6); }
+
+    .bp-card p {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 1.6vw, 1.125rem);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .bp-card.accent p { color: var(--white); }
+
+    .bp-tension {
+      background: var(--parchment-mid);
+      border-radius: 12px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .bp-tension-item {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .bp-tension-bridge {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--indigo);
+    }
+
+    /* ── COLOR SWATCHES ── */
+    .color-group {
+      margin-bottom: 40px;
+    }
+
+    .color-group-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .color-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .swatch {
+      width: 140px;
+    }
+
+    .swatch-block {
+      height: 80px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .swatch-name {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--ink);
+      display: block;
+    }
+
+    .swatch-hex {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: var(--ink-light);
+    }
+
+    .swatch-use {
+      font-size: 0.6875rem;
+      color: var(--ink-ghost);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* ── SEMANTIC COLOR TABLE ── */
+    .semantic-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    .semantic-table th {
+      text-align: left;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      padding: 10px 16px 10px 0;
+      border-bottom: 1.5px solid var(--rule-warm);
+    }
+
+    .semantic-table td {
+      padding: 12px 16px 12px 0;
+      border-bottom: 1px solid var(--rule-warm);
+      color: var(--ink-mid);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .semantic-table td:first-child {
+      font-weight: 600;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .token-chip {
+      display: inline-block;
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      background: var(--parchment-mid);
+      color: var(--indigo-deep);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* ── TYPE SPECIMENS ── */
+    .type-specimen {
+      padding: 32px 0;
+      border-bottom: 1px solid var(--rule-warm);
+    }
+
+    .type-specimen:last-child { border-bottom: none; }
+
+    .type-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .type-meta-item {
+      font-size: 0.6875rem;
+      color: var(--ink-light);
+    }
+
+    .type-meta-item strong {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .specimen-t1 {
+      font-family: var(--serif);
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .specimen-t1-light {
+      font-family: var(--serif);
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .specimen-t1-italic {
+      font-family: var(--serif);
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 400;
+      font-style: italic;
+      font-optical-sizing: auto;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--indigo);
+    }
+
+    .specimen-t2 {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .specimen-t3 {
+      font-family: var(--sans);
+      font-size: clamp(1.0625rem, 2vw, 1.25rem);
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--ink);
+    }
+
+    .specimen-t4 {
+      font-family: var(--sans);
+      font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+      font-weight: 400;
+      line-height: 1.72;
+      color: var(--ink-mid);
+    }
+
+    .specimen-t5 {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+    }
+
+    .specimen-callout {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1.125rem, 2vw, 1.375rem);
+      line-height: 1.55;
+      color: var(--ink);
+      border-left: 3px solid var(--indigo);
+      padding-left: 20px;
+    }
+
+    /* ── REGISTER DEMO ── */
+    .register-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .register-panel {
+      padding: 40px 36px;
+    }
+
+    .register-panel.warm-panel { background: var(--parchment); }
+    .register-panel.cool-panel { background: var(--indigo-tint); }
+
+    .register-label {
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .register-panel.cool-panel .register-label { color: var(--indigo-mid); }
+
+    .register-panel h3 {
+      font-family: var(--serif);
+      font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .register-panel p {
+      font-size: 0.9375rem;
+      color: var(--ink-mid);
+      line-height: 1.7;
+    }
+
+    /* ── SPACING ── */
+    .space-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .space-item {
+      text-align: center;
+    }
+
+    .space-block {
+      background: var(--indigo);
+      opacity: 0.18;
+      width: 100%;
+      border-radius: 3px;
+      margin-bottom: 8px;
+    }
+
+    .space-val {
+      font-family: 'Courier New', monospace;
+      font-size: 0.6875rem;
+      color: var(--ink-light);
+      display: block;
+    }
+
+    .space-label {
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-ghost);
+    }
+
+    /* ── COMPONENTS ── */
+    .comp-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      padding: 13px 28px;
+      border-radius: 999px;
+      transition: opacity 180ms ease, transform 120ms ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--indigo);
+      color: var(--white);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--indigo);
+      border: 2px solid var(--indigo);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink-mid);
+      border: 2px solid var(--rule-warm);
+    }
+
+    .btn-dark {
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    /* Eyebrow */
+    .eyebrow {
+      font-family: var(--sans);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--indigo-mid);
+    }
+
+    /* Callout block */
+    .callout-block {
+      border-left: 3px solid var(--indigo);
+      padding: 4px 0 4px 20px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    /* Divider */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--rule-warm);
+      margin: 32px 0;
+    }
+
+    /* Stat */
+    .stat-demo {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 600;
+      color: var(--indigo);
+      line-height: 1;
+    }
+
+    /* Tag / badge */
+    .tag {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .tag-warm {
+      background: var(--parchment-mid);
+      color: var(--ink-mid);
+    }
+
+    .tag-brand {
+      background: rgba(74,72,200,0.1);
+      color: var(--indigo-deep);
+    }
+
+    /* Card */
+    .card-demo {
+      background: var(--white);
+      border: 1.5px solid var(--rule-warm);
+      border-radius: 14px;
+      padding: 28px 24px;
+      max-width: 300px;
+    }
+
+    /* ── VOICE RULES ── */
+    .voice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .voice-card {
+      padding: 24px;
+      border-radius: 12px;
+    }
+
+    .voice-card.do {
+      background: rgba(74,72,200,0.06);
+      border: 1.5px solid rgba(74,72,200,0.15);
+    }
+
+    .voice-card.dont {
+      background: rgba(26,26,26,0.04);
+      border: 1.5px solid var(--rule-warm);
+    }
+
+    .voice-card-label {
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .voice-card.do .voice-card-label { color: var(--indigo-mid); }
+
+    .voice-card ul {
+      list-style: none;
+    }
+
+    .voice-card li {
+      font-size: 0.9375rem;
+      color: var(--ink-mid);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      line-height: 1.5;
+    }
+
+    .voice-card li:last-child { border-bottom: none; }
+
+    /* ── MOTION PRINCIPLES ── */
+    .motion-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .motion-card {
+      background: var(--white);
+      border: 1.5px solid var(--rule-warm);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .motion-card h4 {
+      font-family: var(--sans);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .motion-card p {
+      font-size: 0.875rem;
+      color: var(--ink-mid);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .motion-val {
+      font-family: 'Courier New', monospace;
+      font-size: 0.8125rem;
+      color: var(--indigo);
+      display: block;
+      margin-top: 8px;
+    }
+
+    /* ── USAGE RULES ── */
+    .rule-list {
+      list-style: none;
+    }
+
+    .rule-list li {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--rule-warm);
+      align-items: flex-start;
+      font-size: 0.9375rem;
+      color: var(--ink-mid);
+      line-height: 1.6;
+    }
+
+    .rule-list li:last-child { border-bottom: none; }
+
+    .rule-icon {
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── GRID LAYOUT DEMO ── */
+    .layout-demo {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 32px;
+      border: 1.5px solid var(--rule-warm);
+    }
+
+    .layout-row {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .layout-block {
+      background: var(--indigo-tint);
+      border-radius: 6px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--indigo-mid);
+    }
+
+    .layout-block.accent-block {
+      background: var(--indigo);
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ── RESPONSIVE NOTE ── */
+    .ds-nav-stub { opacity: 0.45; font-style: italic; }
+    @media (max-width: 860px) {
+      .ds-nav { display: none; }
+      .ds-main { margin-left: 0; }
+      .bp-grid,
+      .register-grid,
+      .voice-grid,
+      .motion-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── SIDEBAR NAV ── -->
+  <nav class="ds-nav">
+    <a href="index.html" style="text-decoration:none;">
+      <div class="ds-nav-brand">Good Soul<br>Signal Dojo</div>
+      <div class="ds-nav-sub">Design Reference</div>
+    </a>
+
+    <ul>
+      <li class="ds-nav-section">Documents</li>
+      <li><a href="index.html">Brand Position</a></li>
+      <li><a href="directions.html">Directions &amp; Decisions</a></li>
+      <li><a href="design-system.html" style="color:var(--white);">Design System ←</a></li>
+
+      <li class="ds-nav-section">Live</li>
+      <li><a href="index.html">Brand Position</a></li>
+      <li><a href="directions.html">Directions &amp; Decisions</a></li>
+      <li><a href="design-system.html" style="color:var(--white);">Design System ←</a></li>
+
+      <li class="ds-nav-section">In Development</li>
+      <li><a href="messaging.html" class="ds-nav-stub">Messaging Architecture</a></li>
+      <li><a href="voice.html" class="ds-nav-stub">Voice &amp; Tone</a></li>
+      <li><a href="content-system.html" class="ds-nav-stub">Content System Map</a></li>
+      <li><a href="messaging-reference.html" class="ds-nav-stub">Messaging Reference</a></li>
+      <li><a href="competitive.html" class="ds-nav-stub">Competitive Landscape</a></li>
+      <li><a href="product-architecture.html" class="ds-nav-stub">Product Architecture</a></li>
+
+      <li class="ds-nav-section">Foundation</li>
+      <li><a href="#brand-position">01 Brand Position</a></li>
+      <li><a href="#color">02 Color</a></li>
+      <li><a href="#typography">03 Typography</a></li>
+      <li><a href="#registers">04 Registers</a></li>
+      <li><a href="#spacing">05 Spacing</a></li>
+
+      <li class="ds-nav-section">Components</li>
+      <li><a href="#buttons">06 Buttons</a></li>
+      <li><a href="#type-components">07 Type Components</a></li>
+      <li><a href="#cards">08 Cards &amp; Containers</a></li>
+
+      <li class="ds-nav-section">Principles</li>
+      <li><a href="#voice">09 Voice</a></li>
+      <li><a href="#motion">10 Motion</a></li>
+      <li><a href="#layout">11 Layout</a></li>
+      <li><a href="#usage">12 Usage Rules</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── MAIN ── -->
+  <main class="ds-main">
+
+    <!-- COVER -->
+    <div class="ds-cover" id="top">
+      <span class="ds-cover-label">Design System — Version 1 · April 2026</span>
+      <h1>Good Soul <em>/</em><br>Signal Dojo</h1>
+      <div class="ds-cover-meta">
+        <div class="ds-cover-meta-item">
+          <strong>Direction</strong>
+          The Inhabited Tension
+        </div>
+        <div class="ds-cover-meta-item">
+          <strong>Primary Serif</strong>
+          Fraunces (variable)
+        </div>
+        <div class="ds-cover-meta-item">
+          <strong>Primary Sans</strong>
+          Assistant
+        </div>
+        <div class="ds-cover-meta-item">
+          <strong>Color Direction</strong>
+          Warmed Indigo + Japandi Neutrals
+        </div>
+        <div class="ds-cover-meta-item">
+          <strong>Status</strong>
+          In Development
+        </div>
+      </div>
+    </div>
+
+    <!-- BRAND POSITION -->
+    <section class="ds-section warm" id="brand-position">
+      <div class="ds-wrap">
+        <span class="ds-section-label">01 — Foundation</span>
+        <h2 class="ds-section-title">Brand Position</h2>
+        <p class="ds-section-desc">The filter for every design decision. When in doubt, return here.</p>
+
+        <div class="bp-grid">
+          <div class="bp-card accent">
+            <span class="bp-card-label">What this brand is</span>
+            <p>A precision training environment for people who have done the inner work and are ready for the outer architecture. Warm enough to make you feel found. Rigorous enough to make the work real.</p>
+          </div>
+          <div class="bp-card">
+            <span class="bp-card-label">What this brand is not</span>
+            <p>A productivity system. A motivational platform. A place that treats you as a conversion metric or a persona to be optimized.</p>
+          </div>
+          <div class="bp-card">
+            <span class="bp-card-label">What it feels like</span>
+            <p>Walking into a space built for exactly this kind of work. Quiet. Capable. Alive. The kind of stillness that is not empty but loaded. You feel seen before anything is asked of you.</p>
+          </div>
+          <div class="bp-card">
+            <span class="bp-card-label">The emotional contract</span>
+            <p>Safe first. Then heard. Then capable. Confidence is the outcome, not the entry point. This sequence is non-negotiable across every touchpoint.</p>
+          </div>
+        </div>
+
+        <div class="bp-tension">
+          <span class="bp-tension-item">Inner</span>
+          <span class="bp-tension-bridge">↔ inhabits ↔</span>
+          <span class="bp-tension-item">Outer</span>
+          <span style="margin: 0 8px; color: var(--sand);">·</span>
+          <span class="bp-tension-item">Soul</span>
+          <span class="bp-tension-bridge">↔ inhabits ↔</span>
+          <span class="bp-tension-item">Signal</span>
+          <span style="margin: 0 8px; color: var(--sand);">·</span>
+          <span class="bp-tension-item">Stillness</span>
+          <span class="bp-tension-bridge">↔ inhabits ↔</span>
+          <span class="bp-tension-item">Precision</span>
+        </div>
+
+        <p style="font-size: 0.875rem; color: var(--ink-light); margin-top: 16px;">The brand does not resolve this tension. It inhabits it. Design that flattens one side at the expense of the other is out of brand.</p>
+      </div>
+    </section>
+
+    <!-- COLOR -->
+    <section class="ds-section white" id="color">
+      <div class="ds-wrap">
+        <span class="ds-section-label">02 — Color</span>
+        <h2 class="ds-section-title">Color System</h2>
+        <p class="ds-section-desc">Two registers in dialogue. Warm neutrals carry the inner foundation layer. Deep indigo bridges both registers as the brand signal. Neither dominates.</p>
+
+        <div class="color-group">
+          <span class="color-group-label">Primary — Deep Indigo</span>
+          <div class="color-row">
+            <div class="swatch">
+              <div class="swatch-block" style="background:#4A48C8;"></div>
+              <span class="swatch-name">Indigo</span>
+              <span class="swatch-hex">#4A48C8</span>
+              <span class="swatch-use">Primary brand. CTAs, accents, active states.</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-block" style="background:#2D2C8A;"></div>
+              <span class="swatch-name">Indigo Deep</span>
+              <span class="swatch-hex">#2D2C8A</span>
+              <span class="swatch-use">Dark surfaces, pressed states, headings on tint.</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-block" style="background:#6E6DD4;"></div>
+              <span class="swatch-name">Indigo Mid</span>
+              <span class="swatch-hex">#6E6DD4</span>
+              <span class="swatch-use">Secondary accents, eyebrows, icons.</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-block" style="background:#EEEEF8; border:1px solid #ddd;"></div>
+              <span class="swatch-name">Indigo Tint</span>
+              <span class="swatch-hex">#EEEEF8</span>
+              <span class="swatch-use">Section backgrounds in the cool register.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-group">
+          <span class="color-group-label">Warm Neutrals — The Japandi Layer</span>
+          <div class="color-row">
+            <div class="swatch">
+              <div class="swatch-block" style="background:#F7F5F0; border:1px solid #ddd;"></div>
+              <span class="swatch-name">Parchment</span>
+              <span class="swatch-hex">#F7F5F0</span>
+              <span class="swatch-use">Primary warm surface. Inner foundation sections.</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-block" style="background:#EDE9E0; border:1px solid #ddd;"></div>
+              <span class="swatch-name">Parchment Mid</span>
+              <span class="swatch-hex">#EDE9E0</span>
+              <span class="swatch-use">Dividers, card borders in warm register.</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-block" style="background:#C9BFA8;"></div>
+              <span class="swatch-name">Sand</span>
+              <span class="swatch-hex">#C9BFA8</span>
+              <span class="swatch-use">Muted labels on dark surfaces. Nav secondary text.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-group">
+          <span class="color-group-label">Ink — Text &amp; Surfaces</span>
+          <div class="color-row">
+            <div class="swatch">
+              <div class="swatch-block" style="background:#1A1A1A;"></div>
+              <span class="swatch-name">Ink</span>
+              <span class="swatch-hex">#1A1A1A</span>
+              <span class="swatch-use">Primary text. Warm near-black. Dark section bg.</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-block" style="background:#4A4A4A;"></div>
+              <span class="swatch-name">Ink Mid</span>
+              <span class="swatch-hex">#4A4A4A</span>
+              <span class="swatch-use">Body text, secondary content.</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-block" style="background:#7A7A7A;"></div>
+              <span class="swatch-name">Ink Light</span>
+              <span class="swatch-hex">#7A7A7A</span>
+              <span class="swatch-use">Captions, labels, meta text.</span>
+            </div>
+            <div class="swatch">
+              <div class="swatch-block" style="background:#FFFFFF; border:1px solid #ddd;"></div>
+              <span class="swatch-name">White</span>
+              <span class="swatch-hex">#FFFFFF</span>
+              <span class="swatch-use">Crisp surfaces, contrast sections.</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="font-family:var(--sans);font-size:0.875rem;font-weight:700;color:var(--ink);margin-bottom:16px;">Semantic Color Intent</h3>
+        <table class="semantic-table">
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>Token</th>
+              <th>Value</th>
+              <th>Intent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Brand Primary</td>
+              <td><span class="token-chip">--indigo</span></td>
+              <td>#4A48C8</td>
+              <td>CTAs, active states, brand moments. Use with intention — not for decoration.</td>
+            </tr>
+            <tr>
+              <td>Warm Surface</td>
+              <td><span class="token-chip">--parchment</span></td>
+              <td>#F7F5F0</td>
+              <td>Default page background. Inner foundation register. Where the soul content lives.</td>
+            </tr>
+            <tr>
+              <td>Cool Surface</td>
+              <td><span class="token-chip">--indigo-tint</span></td>
+              <td>#EEEEF8</td>
+              <td>System and mechanism content. Where the signal content lives.</td>
+            </tr>
+            <tr>
+              <td>Dark Surface</td>
+              <td><span class="token-chip">--ink</span></td>
+              <td>#1A1A1A</td>
+              <td>Hero sections, final CTAs, nav. High contrast moments only.</td>
+            </tr>
+            <tr>
+              <td>Primary Text</td>
+              <td><span class="token-chip">--ink</span></td>
+              <td>#1A1A1A</td>
+              <td>Headlines, strong statements. Warm near-black — never pure #000.</td>
+            </tr>
+            <tr>
+              <td>Body Text</td>
+              <td><span class="token-chip">--ink-mid</span></td>
+              <td>#4A4A4A</td>
+              <td>Default reading text. Long-form prose. Never use on dark surfaces.</td>
+            </tr>
+            <tr>
+              <td>Divider Warm</td>
+              <td><span class="token-chip">--rule-warm</span></td>
+              <td>#E5E0D6</td>
+              <td>Section breaks and borders in warm register.</td>
+            </tr>
+            <tr>
+              <td>Divider Cool</td>
+              <td><span class="token-chip">--rule-cool</span></td>
+              <td>#DDDDF0</td>
+              <td>Section breaks and borders in cool register.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TYPOGRAPHY -->
+    <section class="ds-section warm" id="typography">
+      <div class="ds-wrap">
+        <span class="ds-section-label">03 — Typography</span>
+        <h2 class="ds-section-title">Type System</h2>
+        <p class="ds-section-desc">Two typefaces in genuine dialogue. Fraunces carries emotional and philosophical weight. Assistant carries structural and operational clarity. The register shift as content shifts is intentional — not inconsistent.</p>
+
+        <!-- T1 Serif Display -->
+        <div class="type-specimen">
+          <div class="type-meta">
+            <div class="type-meta-item"><strong>Level</strong>T1 — Hero Headline</div>
+            <div class="type-meta-item"><strong>Font</strong>Fraunces</div>
+            <div class="type-meta-item"><strong>Weight</strong>600 or 300</div>
+            <div class="type-meta-item"><strong>Size</strong>clamp(2.25rem, 5vw, 3.5rem)</div>
+            <div class="type-meta-item"><strong>Use</strong>Hero only</div>
+          </div>
+          <div class="specimen-t1">You Did the Inner Work.</div>
+          <div class="specimen-t1-light" style="margin-top:4px;">Here Is the Outer System.</div>
+          <p style="font-size:0.8125rem;color:var(--ink-light);margin-top:12px;">Mix 600 (statement) and 300 (resolution) within a single headline for tension and release.</p>
+        </div>
+
+        <!-- T1 Italic -->
+        <div class="type-specimen">
+          <div class="type-meta">
+            <div class="type-meta-item"><strong>Level</strong>T1 Italic — Emphasis</div>
+            <div class="type-meta-item"><strong>Font</strong>Fraunces Italic</div>
+            <div class="type-meta-item"><strong>Weight</strong>400 italic</div>
+            <div class="type-meta-item"><strong>Use</strong>Key phrase emphasis within T1. Accent color only.</div>
+          </div>
+          <div class="specimen-t1-italic">The gap between capable and actual.</div>
+          <p style="font-size:0.8125rem;color:var(--ink-light);margin-top:12px;">Fraunces italic at optical size has genuine personality. Use it to make a single phrase land. Never more than one per headline.</p>
+        </div>
+
+        <!-- T2 -->
+        <div class="type-specimen">
+          <div class="type-meta">
+            <div class="type-meta-item"><strong>Level</strong>T2 — Section Heading</div>
+            <div class="type-meta-item"><strong>Font</strong>Fraunces</div>
+            <div class="type-meta-item"><strong>Weight</strong>600</div>
+            <div class="type-meta-item"><strong>Size</strong>clamp(1.5rem, 3vw, 2.25rem)</div>
+          </div>
+          <div class="specimen-t2">The gap has a name. It has a fix.</div>
+        </div>
+
+        <!-- T3 -->
+        <div class="type-specimen">
+          <div class="type-meta">
+            <div class="type-meta-item"><strong>Level</strong>T3 — Subsection / Large Body</div>
+            <div class="type-meta-item"><strong>Font</strong>Assistant</div>
+            <div class="type-meta-item"><strong>Weight</strong>600</div>
+            <div class="type-meta-item"><strong>Size</strong>clamp(1.0625rem, 2vw, 1.25rem)</div>
+          </div>
+          <div class="specimen-t3">01 — Personal Brand Strategy</div>
+          <p style="font-size:0.8125rem;color:var(--ink-light);margin-top:8px;">Used for prompt titles, subsection headers, and component labels. Sans-serif signals operational precision.</p>
+        </div>
+
+        <!-- T4 -->
+        <div class="type-specimen">
+          <div class="type-meta">
+            <div class="type-meta-item"><strong>Level</strong>T4 — Body Text</div>
+            <div class="type-meta-item"><strong>Font</strong>Assistant</div>
+            <div class="type-meta-item"><strong>Weight</strong>400</div>
+            <div class="type-meta-item"><strong>Size</strong>clamp(0.9375rem, 1.5vw, 1.0625rem)</div>
+            <div class="type-meta-item"><strong>Leading</strong>1.72</div>
+          </div>
+          <div class="specimen-t4">The certification prepared you to coach. It did not give you a go-to-market system. No framework for positioning yourself. No structure for packaging what you offer. No clear path from outreach to paying clients.</div>
+        </div>
+
+        <!-- T5 -->
+        <div class="type-specimen">
+          <div class="type-meta">
+            <div class="type-meta-item"><strong>Level</strong>T5 — Eyebrow / Label / Meta</div>
+            <div class="type-meta-item"><strong>Font</strong>Assistant</div>
+            <div class="type-meta-item"><strong>Weight</strong>700</div>
+            <div class="type-meta-item"><strong>Size</strong>0.6875rem</div>
+            <div class="type-meta-item"><strong>Tracking</strong>0.16–0.20em</div>
+          </div>
+          <div class="specimen-t5">Founding Member · Signal Dojo Core</div>
+        </div>
+
+        <!-- Callout -->
+        <div class="type-specimen">
+          <div class="type-meta">
+            <div class="type-meta-item"><strong>Component</strong>Callout / Pull Quote</div>
+            <div class="type-meta-item"><strong>Font</strong>Fraunces Italic</div>
+            <div class="type-meta-item"><strong>Use</strong>Testimonials, key statements, emotional beats.</div>
+          </div>
+          <div class="specimen-callout">Self-trust is not a feeling you wait for. It is built through action.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTERS -->
+    <section class="ds-section white" id="registers">
+      <div class="ds-wrap">
+        <span class="ds-section-label">04 — Registers</span>
+        <h2 class="ds-section-title">The Two Registers</h2>
+        <p class="ds-section-desc">The brand's visual language shifts as the content shifts. The warm register carries inner foundation content. The cool register carries system and mechanism content. Both use the same type. The surface, the divider color, and the eyebrow treatment signal which register you are in.</p>
+
+        <div class="register-grid">
+          <div class="register-panel warm-panel">
+            <span class="register-label">Warm Register — Inner Foundation</span>
+            <h3>Where the soul content lives.</h3>
+            <p>Surface: Parchment (#F7F5F0). Dividers: rule-warm. Eyebrow: Ink Light. Used for: identity, rupture and return, self-trust, the gap, the return story.</p>
+          </div>
+          <div class="register-panel cool-panel">
+            <span class="register-label">Cool Register — Signal / System</span>
+            <h3>Where the signal content lives.</h3>
+            <p>Surface: Indigo Tint (#EEEEF8). Dividers: rule-cool. Eyebrow: Indigo Mid. Used for: the mechanism, prompt structure, the three levers, how it works.</p>
+          </div>
+        </div>
+
+        <div style="background:var(--ink);border-radius:14px;padding:32px 36px;">
+          <span class="register-label" style="color:var(--sand);">Dark Register — High Contrast</span>
+          <h3 style="font-family:var(--serif);font-size:clamp(1.25rem,2.2vw,1.5rem);color:var(--white);margin-bottom:12px;">Used for hero, final CTA, and navigation.</h3>
+          <p style="font-size:0.9375rem;color:rgba(255,255,255,0.6);line-height:1.7;margin:0;">Surface: Ink (#1A1A1A). Text: White. Accent: Indigo Mid or Sand. Use sparingly. High-contrast moments only. The brand cannot live entirely in the dark — it must return to warmth.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPACING -->
+    <section class="ds-section warm" id="spacing">
+      <div class="ds-wrap">
+        <span class="ds-section-label">05 — Spacing</span>
+        <h2 class="ds-section-title">Space Scale</h2>
+        <p class="ds-section-desc">Space is a design element, not a gap between elements. The Japandi reference means space is used with intention. Fortress of Solitude sections get air. Danger Room sections get density. The system responds to content, not a uniform grid.</p>
+
+        <div class="space-row">
+          <div class="space-item" style="width:40px;">
+            <div class="space-block" style="height:4px;"></div>
+            <span class="space-val">4px</span>
+            <span class="space-label">xs</span>
+          </div>
+          <div class="space-item" style="width:48px;">
+            <div class="space-block" style="height:8px;"></div>
+            <span class="space-val">8px</span>
+            <span class="space-label">sm</span>
+          </div>
+          <div class="space-item" style="width:56px;">
+            <div class="space-block" style="height:16px;"></div>
+            <span class="space-val">16px</span>
+            <span class="space-label">md</span>
+          </div>
+          <div class="space-item" style="width:64px;">
+            <div class="space-block" style="height:24px;"></div>
+            <span class="space-val">24px</span>
+            <span class="space-label">lg</span>
+          </div>
+          <div class="space-item" style="width:72px;">
+            <div class="space-block" style="height:32px;"></div>
+            <span class="space-val">32px</span>
+            <span class="space-label">xl</span>
+          </div>
+          <div class="space-item" style="width:80px;">
+            <div class="space-block" style="height:48px;"></div>
+            <span class="space-val">48px</span>
+            <span class="space-label">2xl</span>
+          </div>
+          <div class="space-item" style="width:88px;">
+            <div class="space-block" style="height:72px;"></div>
+            <span class="space-val">72px</span>
+            <span class="space-label">section</span>
+          </div>
+          <div class="space-item" style="width:96px;">
+            <div class="space-block" style="height:96px;"></div>
+            <span class="space-val">96px</span>
+            <span class="space-label">hero</span>
+          </div>
+        </div>
+
+        <table class="semantic-table">
+          <thead>
+            <tr><th>Token</th><th>Value</th><th>Use</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>xs</td><td>4px</td><td>Icon gaps, tight label spacing</td></tr>
+            <tr><td>sm</td><td>8px</td><td>Between label and content, tag padding</td></tr>
+            <tr><td>md</td><td>16px</td><td>Between list items, card padding top/bottom</td></tr>
+            <tr><td>lg</td><td>24px</td><td>Between component groups, card padding sides</td></tr>
+            <tr><td>xl</td><td>32px</td><td>Between sections within a component</td></tr>
+            <tr><td>2xl</td><td>48px</td><td>Below section headings, before major components</td></tr>
+            <tr><td>section</td><td>72px</td><td>Standard section padding top and bottom</td></tr>
+            <tr><td>hero</td><td>96px</td><td>Hero section top padding only</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- BUTTONS -->
+    <section class="ds-section white" id="buttons">
+      <div class="ds-wrap">
+        <span class="ds-section-label">06 — Components</span>
+        <h2 class="ds-section-title">Buttons</h2>
+        <p class="ds-section-desc">Three button types. One hierarchy. Never use more than two button types in the same visual zone. The primary action is always clear.</p>
+
+        <div class="comp-row" style="margin-bottom:48px;">
+          <button class="btn btn-primary">Join as a Founding Member — $297</button>
+          <button class="btn btn-secondary">Learn More</button>
+          <button class="btn btn-ghost">Back</button>
+          <button class="btn btn-dark">Get Signal Dojo Core</button>
+        </div>
+
+        <table class="semantic-table">
+          <thead>
+            <tr><th>Type</th><th>Use</th><th>Rules</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Primary (Filled Indigo)</td>
+              <td>The one action that matters most per section. Purchase, enroll, join.</td>
+              <td>One per visible viewport. Never compete with another primary.</td>
+            </tr>
+            <tr>
+              <td>Secondary (Outline Indigo)</td>
+              <td>Mid-page CTAs. Secondary actions. Learn more, see how it works.</td>
+              <td>Use when a primary CTA already exists nearby.</td>
+            </tr>
+            <tr>
+              <td>Ghost (Outline Neutral)</td>
+              <td>Tertiary actions. Back, cancel, dismiss.</td>
+              <td>Never use as a CTA. For navigation and destructive actions only.</td>
+            </tr>
+            <tr>
+              <td>Dark (Filled Ink)</td>
+              <td>CTAs within dark sections where indigo would not contrast sufficiently.</td>
+              <td>Use on dark surfaces only. Never on warm or cool surfaces.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="font-size:0.875rem;color:var(--ink-light);margin-top:16px;">All buttons use pill border-radius (999px). Font-size 0.875rem. Font-weight 700. Letter-spacing 0.04em. Transition: opacity 180ms ease, transform 120ms ease. Hover: opacity 0.85, translateY(-1px).</p>
+      </div>
+    </section>
+
+    <!-- TYPE COMPONENTS -->
+    <section class="ds-section warm" id="type-components">
+      <div class="ds-wrap">
+        <span class="ds-section-label">07 — Components</span>
+        <h2 class="ds-section-title">Type Components</h2>
+
+        <p style="font-size:0.875rem;font-weight:700;color:var(--ink);margin-bottom:12px;">Eyebrow</p>
+        <div style="margin-bottom:32px;">
+          <span class="eyebrow">The System · Signal Dojo Core</span>
+          <p style="font-size:0.8125rem;color:var(--ink-light);margin-top:12px;">Used above every section heading. Always uppercase, always tracked. In warm register: Indigo Mid. In dark register: Sand. In cool register: Indigo Deep.</p>
+        </div>
+
+        <p style="font-size:0.875rem;font-weight:700;color:var(--ink);margin-bottom:12px;">Callout / Pull Quote</p>
+        <div style="margin-bottom:32px;">
+          <div class="callout-block">The inner work does not precede the outer work. They develop together.</div>
+          <p style="font-size:0.8125rem;color:var(--ink-light);margin-top:12px;">Left border: 3px solid Indigo. Fraunces italic. Used for testimonials, key philosophical statements, and emotional anchor moments. One per section maximum.</p>
+        </div>
+
+        <p style="font-size:0.875rem;font-weight:700;color:var(--ink);margin-bottom:12px;">Tags</p>
+        <div class="comp-row" style="margin-bottom:32px;">
+          <span class="tag tag-warm">Founding Member</span>
+          <span class="tag tag-brand">Heroic Certified</span>
+        </div>
+
+        <p style="font-size:0.875rem;font-weight:700;color:var(--ink);margin-bottom:12px;">Stat Display</p>
+        <div style="margin-bottom:8px;">
+          <span class="stat-demo">8/10</span>
+          <p style="font-size:0.9375rem;color:var(--ink-mid);margin-top:4px;">Beta applicants confirmed Heroic-certified coaches.</p>
+        </div>
+        <p style="font-size:0.8125rem;color:var(--ink-light);">Fraunces 600. Indigo color. Used for social proof numbers. One or two per page maximum.</p>
+      </div>
+    </section>
+
+    <!-- CARDS -->
+    <section class="ds-section white" id="cards">
+      <div class="ds-wrap">
+        <span class="ds-section-label">08 — Components</span>
+        <h2 class="ds-section-title">Cards &amp; Containers</h2>
+
+        <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:40px;">
+          <div class="card-demo">
+            <span class="eyebrow" style="display:block;margin-bottom:12px;">Before</span>
+            <p style="font-size:0.9375rem;color:var(--ink-mid);line-height:1.6;margin:0;">Capable but without a working go-to-market system. Effort without direction.</p>
+          </div>
+          <div class="card-demo" style="background:var(--indigo);border-color:var(--indigo);">
+            <span class="eyebrow" style="display:block;margin-bottom:12px;color:rgba(255,255,255,0.6);">After</span>
+            <p style="font-size:0.9375rem;color:rgba(255,255,255,0.85);line-height:1.6;margin:0;">Clear positioning, real offer, first paying clients, visible path from daily activity to revenue.</p>
+          </div>
+        </div>
+
+        <table class="semantic-table">
+          <thead>
+            <tr><th>Container</th><th>Background</th><th>Border</th><th>Radius</th><th>Use</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Default Card</td><td>White</td><td>1.5px rule-warm</td><td>14px</td><td>Standard content containers on warm or cool surfaces.</td></tr>
+            <tr><td>Accent Card</td><td>Indigo</td><td>None</td><td>14px</td><td>After state, CTA emphasis, transformation results.</td></tr>
+            <tr><td>Tint Card</td><td>Indigo Tint</td><td>1.5px rule-cool</td><td>12px</td><td>Secondary info, supplementary content in cool register.</td></tr>
+            <tr><td>Dark Card</td><td>Ink</td><td>None</td><td>14px</td><td>Featured testimonials, high-contrast callouts.</td></tr>
+            <tr><td>Parchment Card</td><td>Parchment Mid</td><td>1.5px rule-warm</td><td>12px</td><td>Subtle containers in warm register. Does not compete with page bg.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- VOICE -->
+    <section class="ds-section warm" id="voice">
+      <div class="ds-wrap">
+        <span class="ds-section-label">09 — Principles</span>
+        <h2 class="ds-section-title">Voice &amp; Copy Rules</h2>
+        <p class="ds-section-desc">The brand speaks peer-to-peer. Not above. Not below. Further along, not higher up. Every word earns its place.</p>
+
+        <div class="voice-grid">
+          <div class="voice-card do">
+            <span class="voice-card-label">Write this way</span>
+            <ul>
+              <li>Short sentences. One idea lands before the next arrives.</li>
+              <li>Active voice. Always.</li>
+              <li>Specific over general. Concrete image over abstract statement.</li>
+              <li>Lead with the felt experience. Framework arrives second.</li>
+              <li>Name the thing precisely. Do not soften it.</li>
+              <li>Trust the reader. Do not hand-hold.</li>
+              <li>Peer-to-peer. You are further along, not higher up.</li>
+            </ul>
+          </div>
+          <div class="voice-card dont">
+            <span class="voice-card-label">Never write this way</span>
+            <ul>
+              <li>Setup language. "In conclusion," "In summary," "Let me explain."</li>
+              <li>Motivational speaker register. Hype. Overclaiming.</li>
+              <li>Passive constructions. "Is designed to help you."</li>
+              <li>Em dashes. Use commas, periods, or semicolons.</li>
+              <li>Filler affirmations. "Great question." "Absolutely."</li>
+              <li>Abstract without grounding. Philosophy without lived texture.</li>
+              <li>Urgency manufacturing. Countdown timers, artificial scarcity.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top:24px;padding:28px 32px;background:var(--white);border-radius:14px;border:1.5px solid var(--rule-warm);">
+          <span class="eyebrow" style="display:block;margin-bottom:16px;">Exact Language — Preserve These Precisely</span>
+          <p style="font-family:var(--serif);font-style:italic;font-size:1.0625rem;color:var(--ink);line-height:1.7;margin-bottom:8px;">"In the dark, I am the light that chooses love."</p>
+          <p style="font-family:var(--serif);font-style:italic;font-size:1.0625rem;color:var(--ink);line-height:1.7;margin-bottom:8px;">"I name it. I own it. I return to who I am."</p>
+          <p style="font-family:var(--serif);font-style:italic;font-size:1.0625rem;color:var(--ink);line-height:1.7;">"Where Science Meets Soul."</p>
+          <p style="font-size:0.8125rem;color:var(--ink-light);margin-top:16px;">These phrases are load-bearing. Never paraphrase, reword, or split them. They arrive whole or not at all.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOTION -->
+    <section class="ds-section white" id="motion">
+      <div class="ds-wrap">
+        <span class="ds-section-label">10 — Principles</span>
+        <h2 class="ds-section-title">Motion Principles</h2>
+        <p class="ds-section-desc">Motion is used with the same intentionality as space. The brand does not perform animation. It arrives with quiet confidence.</p>
+
+        <div class="motion-grid">
+          <div class="motion-card">
+            <h4>Transitions</h4>
+            <p>Opacity and transform only. Never layout-affecting properties.</p>
+            <span class="motion-val">180ms ease</span>
+          </div>
+          <div class="motion-card">
+            <h4>Hover States</h4>
+            <p>Subtle lift. Never dramatic. Confirms interactivity without announcing it.</p>
+            <span class="motion-val">opacity 0.85, translateY(-1px)</span>
+          </div>
+          <div class="motion-card">
+            <h4>Page Load</h4>
+            <p>One orchestrated reveal with staggered delays. Not scattered micro-animations.</p>
+            <span class="motion-val">fadeIn + translateY(12px) → 0</span>
+          </div>
+          <div class="motion-card">
+            <h4>Scroll Reveals</h4>
+            <p>Content enters as the reader arrives at it. Reinforces the sense that the space responds to presence.</p>
+            <span class="motion-val">IntersectionObserver, 240ms ease-out</span>
+          </div>
+          <div class="motion-card">
+            <h4>Duration Rule</h4>
+            <p>Nothing moves for longer than 300ms. The brand does not linger. It arrives and settles.</p>
+            <span class="motion-val">100ms–300ms range</span>
+          </div>
+          <div class="motion-card">
+            <h4>What Never Moves</h4>
+            <p>Text. Layouts. Color fills on scroll. If it carries meaning, it does not animate.</p>
+            <span class="motion-val">prefers-reduced-motion: respect it always</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAYOUT -->
+    <section class="ds-section warm" id="layout">
+      <div class="ds-wrap">
+        <span class="ds-section-label">11 — Principles</span>
+        <h2 class="ds-section-title">Layout System</h2>
+        <p class="ds-section-desc">The page is organized around a content column of 680px maximum, centered within an outer maximum of 1100px. Sections alternate register — warm, white, cool, dark — in a sequence that produces rhythm without feeling random.</p>
+
+        <div class="layout-demo" style="margin-bottom:32px;">
+          <span style="font-size:0.6875rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-light);display:block;margin-bottom:16px;">Recommended Section Rhythm</span>
+          <div class="layout-row" style="grid-template-columns:1fr;">
+            <div class="layout-block accent-block">Hero — Dark Surface</div>
+          </div>
+          <div class="layout-row" style="grid-template-columns:1fr;">
+            <div class="layout-block" style="background:var(--parchment-mid);">Problem — Warm Surface</div>
+          </div>
+          <div class="layout-row" style="grid-template-columns:1fr;">
+            <div class="layout-block" style="background:var(--white);border:1px solid var(--rule-warm);">Diagnosis — White Surface</div>
+          </div>
+          <div class="layout-row" style="grid-template-columns:1fr;">
+            <div class="layout-block">Trust — Cool Surface (Indigo Tint)</div>
+          </div>
+          <div class="layout-row" style="grid-template-columns:1fr;">
+            <div class="layout-block" style="background:var(--parchment-mid);">Fit Check — Warm Surface</div>
+          </div>
+          <div class="layout-row" style="grid-template-columns:1fr;">
+            <div class="layout-block" style="background:var(--white);border:1px solid var(--rule-warm);">The Shift — White Surface</div>
+          </div>
+          <div class="layout-row" style="grid-template-columns:1fr;">
+            <div class="layout-block">Mechanism — Cool Surface</div>
+          </div>
+          <div class="layout-row" style="grid-template-columns:1fr;">
+            <div class="layout-block" style="background:var(--parchment-mid);">Offer — Warm Surface</div>
+          </div>
+          <div class="layout-row" style="grid-template-columns:1fr;">
+            <div class="layout-block" style="background:var(--white);border:1px solid var(--rule-warm);">Proof — White Surface</div>
+          </div>
+          <div class="layout-row" style="grid-template-columns:1fr;">
+            <div class="layout-block accent-block">Final CTA — Dark Surface</div>
+          </div>
+        </div>
+
+        <table class="semantic-table">
+          <thead>
+            <tr><th>Variable</th><th>Value</th><th>Intent</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>--max</td><td>1100px</td><td>Outer container. Full-bleed section backgrounds use this as the reference.</td></tr>
+            <tr><td>--col</td><td>680px</td><td>Content column. Prose, headings, and CTAs never exceed this width.</td></tr>
+            <tr><td>--gutter</td><td>clamp(1.5rem, 5vw, 4rem)</td><td>Horizontal breathing room. Responsive and generous.</td></tr>
+            <tr><td>section padding</td><td>72px top and bottom</td><td>Standard. Hero gets 96px top. Tight sections get 48px.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- USAGE RULES -->
+    <section class="ds-section dark" id="usage">
+      <div class="ds-wrap">
+        <span class="ds-section-label">12 — Usage Rules</span>
+        <h2 class="ds-section-title">What This System Protects</h2>
+        <p class="ds-section-desc">These rules exist because the brand position document has specific requirements. Violating them does not produce a different aesthetic — it produces a different brand.</p>
+
+        <ul class="rule-list">
+          <li style="border-color:rgba(255,255,255,0.1);">
+            <span class="rule-icon">◆</span>
+            <span style="color:rgba(255,255,255,0.75);">The emotional contract is <strong style="color:var(--white);">safe first, then capable</strong>. Never lead with aspiration, confidence, or transformation language before the person feels recognized. Problem before solution. Every time.</span>
+          </li>
+          <li style="border-color:rgba(255,255,255,0.1);">
+            <span class="rule-icon">◆</span>
+            <span style="color:rgba(255,255,255,0.75);">The two registers must coexist. A page built entirely in the cool register loses the soul layer. A page built entirely in the warm register loses the signal layer. <strong style="color:var(--white);">Both must be present</strong> on every major touchpoint.</span>
+          </li>
+          <li style="border-color:rgba(255,255,255,0.1);">
+            <span class="rule-icon">◆</span>
+            <span style="color:rgba(255,255,255,0.75);">Fraunces italic is used <strong style="color:var(--white);">once per headline maximum</strong>. It signals: this is the phrase that matters. Use it more than once and it signals nothing.</span>
+          </li>
+          <li style="border-color:rgba(255,255,255,0.1);">
+            <span class="rule-icon">◆</span>
+            <span style="color:rgba(255,255,255,0.75);">The dark surface is used for <strong style="color:var(--white);">arrival and departure</strong> — hero and final CTA — and nowhere else. The brand cannot live in the dark. It must return to warmth.</span>
+          </li>
+          <li style="border-color:rgba(255,255,255,0.1);">
+            <span class="rule-icon">◆</span>
+            <span style="color:rgba(255,255,255,0.75);">The primary CTA is <strong style="color:var(--white);">one per section</strong>. Never two filled buttons competing. The decision is always clear.</span>
+          </li>
+          <li style="border-color:rgba(255,255,255,0.1);">
+            <span class="rule-icon">◆</span>
+            <span style="color:rgba(255,255,255,0.75);">Motion is quiet. <strong style="color:var(--white);">Nothing performs</strong>. The brand arrives with confidence, not announcement. If an animation calls attention to itself, remove it.</span>
+          </li>
+          <li style="border-color:rgba(255,255,255,0.1);">
+            <span class="rule-icon">◆</span>
+            <span style="color:rgba(255,255,255,0.75);"><strong style="color:var(--white);">Exact language phrases are load-bearing.</strong> They are never paraphrased, split, or italicized for stylistic effect. They arrive whole.</span>
+          </li>
+          <li style="border-color:rgba(255,255,255,0.1);">
+            <span class="rule-icon">◆</span>
+            <span style="color:rgba(255,255,255,0.75);">The brand must never feel like it is <strong style="color:var(--white);">processing a person</strong>. If a design decision makes the user feel like one of many, it is out of brand regardless of how aesthetically consistent it is.</span>
+          </li>
+        </ul>
+
+        <div style="margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.1);">
+          <p style="font-family:var(--serif);font-style:italic;font-size:clamp(1rem,1.8vw,1.25rem);color:rgba(255,255,255,0.6);line-height:1.7;">Good Soul. Where Science Meets Soul.</p>
+          <p style="font-size:0.75rem;color:rgba(255,255,255,0.3);margin-top:8px;">Design System v1 · April 2026 · Adrian Cunanan / Good Soul</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

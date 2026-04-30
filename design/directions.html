@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Good Soul / Signal Dojo — Directions &amp; Decisions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,600&family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --indigo:         #4A48C8;
+      --indigo-deep:    #2D2C8A;
+      --indigo-mid:     #6E6DD4;
+      --indigo-tint:    #EEEEF8;
+      --parchment:      #F7F5F0;
+      --parchment-mid:  #EDE9E0;
+      --sand:           #C9BFA8;
+      --ink:            #1A1A1A;
+      --ink-mid:        #4A4A4A;
+      --ink-light:      #7A7A7A;
+      --ink-ghost:      #A8A8A8;
+      --white:          #FFFFFF;
+      --rule-warm:      #E5E0D6;
+      --rule-cool:      #DDDDF0;
+      --serif: 'Fraunces', Georgia, serif;
+      --sans:  'Assistant', -apple-system, BlinkMacSystemFont, sans-serif;
+      --max:    1100px;
+      --gutter: clamp(1.5rem, 5vw, 4rem);
+    }
+
+    html { font-size: 100%; scroll-behavior: smooth; }
+    body {
+      background: var(--parchment);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: clamp(0.9375rem, 1.5vw, 1rem);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── SIDEBAR ── */
+    .ds-nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 220px; height: 100vh;
+      background: var(--ink);
+      padding: 40px 24px;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .ds-nav-brand {
+      font-family: var(--serif);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+      line-height: 1.3;
+      text-decoration: none;
+      display: block;
+    }
+
+    .ds-nav-sub {
+      font-family: var(--sans);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 32px;
+    }
+
+    .ds-nav ul { list-style: none; }
+
+    .ds-nav-section {
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin: 24px 0 8px;
+    }
+
+    .ds-nav a {
+      display: block;
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      padding: 4px 0;
+      transition: color 160ms ease;
+    }
+    .ds-nav a:hover { color: var(--white); }
+    .ds-nav a.active { color: var(--white); }
+    .ds-nav-stub { opacity: 0.45 !important; font-style: italic; }
+
+    /* ── MAIN ── */
+    .ds-main { margin-left: 220px; min-height: 100vh; }
+
+    .ds-wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    /* ── COVER ── */
+    .ds-cover {
+      background: var(--ink);
+      padding: 96px var(--gutter) 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ds-cover::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -80px;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,72,200,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .ds-cover-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .ds-cover h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 16px;
+      max-width: 700px;
+    }
+
+    .ds-cover h1 em { font-style: italic; color: var(--indigo-mid); }
+
+    .ds-cover-desc {
+      font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+      color: rgba(255,255,255,0.5);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .ds-cover-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .ds-cover-meta-item {
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .ds-cover-meta-item strong {
+      display: block;
+      color: rgba(255,255,255,0.75);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    /* ── SECTIONS ── */
+    .sec { padding: 72px 0; border-bottom: 1px solid var(--rule-warm); }
+    .sec:last-child { border-bottom: none; }
+    .sec.warm { background: var(--parchment); }
+    .sec.white { background: var(--white); }
+    .sec.cool { background: var(--indigo-tint); }
+    .sec.dark { background: var(--ink); }
+
+    .sec-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--indigo-mid);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .sec.dark .sec-label { color: var(--sand); }
+    .sec.cool .sec-label { color: var(--indigo-deep); }
+
+    .sec h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .sec.dark h2 { color: var(--white); }
+
+    .sec-desc {
+      font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+      color: var(--ink-mid);
+      max-width: 640px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    .sec.dark .sec-desc { color: rgba(255,255,255,0.55); }
+
+    /* ── DIRECTION CARDS ── */
+    .direction-card {
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      border: 1.5px solid var(--rule-warm);
+    }
+
+    .direction-card.rejected { opacity: 0.7; }
+
+    .direction-header {
+      padding: 28px 32px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--rule-warm);
+    }
+
+    .direction-card:nth-child(1) .direction-header { background: var(--parchment-mid); }
+    .direction-card:nth-child(2) .direction-header { background: var(--indigo-tint); }
+    .direction-card:nth-child(3) .direction-header { background: var(--indigo); }
+
+    .direction-num {
+      font-family: var(--serif);
+      font-size: 3rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .direction-card:nth-child(3) .direction-num { color: rgba(255,255,255,0.4); }
+
+    .direction-title-block { flex: 1; }
+
+    .direction-title {
+      font-family: var(--serif);
+      font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .direction-card:nth-child(3) .direction-title { color: var(--white); }
+
+    .direction-subtitle {
+      font-size: 0.875rem;
+      color: var(--ink-light);
+      line-height: 1.5;
+    }
+
+    .direction-card:nth-child(3) .direction-subtitle { color: rgba(255,255,255,0.6); }
+
+    .direction-badge {
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .badge-rejected {
+      background: rgba(0,0,0,0.08);
+      color: var(--ink-light);
+    }
+
+    .badge-locked {
+      background: rgba(255,255,255,0.2);
+      color: var(--white);
+    }
+
+    .direction-body {
+      padding: 28px 32px;
+      background: var(--white);
+    }
+
+    .direction-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .direction-col-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .direction-body p {
+      font-size: 0.9375rem;
+      color: var(--ink-mid);
+      line-height: 1.68;
+    }
+
+    .direction-verdict {
+      padding: 18px 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .verdict-rejected { background: var(--parchment-mid); }
+    .verdict-locked { background: rgba(74,72,200,0.07); border: 1.5px solid rgba(74,72,200,0.15); }
+
+    .verdict-label {
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .verdict-locked .verdict-label { color: var(--indigo-mid); }
+
+    .verdict-text {
+      font-size: 0.9375rem;
+      color: var(--ink-mid);
+      line-height: 1.6;
+    }
+
+    /* ── DECISION LOG ── */
+    .decision-log {
+      list-style: none;
+    }
+
+    .decision-entry {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--rule-warm);
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .decision-entry:last-child { border-bottom: none; }
+
+    .decision-meta { }
+
+    .decision-num {
+      font-family: var(--serif);
+      font-size: 0.75rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--indigo-mid);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .decision-title {
+      font-family: var(--sans);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .decision-status {
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .status-locked {
+      background: rgba(74,72,200,0.1);
+      color: var(--indigo-deep);
+    }
+
+    .decision-content { }
+
+    .decision-what {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .decision-chosen {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 1.6vw, 1.125rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .decision-rationale {
+      font-size: 0.9375rem;
+      color: var(--ink-mid);
+      line-height: 1.68;
+      margin-bottom: 12px;
+    }
+
+    .decision-rejected-label {
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-ghost);
+      margin-bottom: 6px;
+      display: block;
+      margin-top: 16px;
+    }
+
+    .decision-rejected {
+      font-size: 0.875rem;
+      color: var(--ink-light);
+      line-height: 1.6;
+      text-decoration: line-through;
+      text-decoration-color: var(--ink-ghost);
+    }
+
+    .decision-protects {
+      margin-top: 14px;
+      padding: 12px 16px;
+      background: var(--parchment-mid);
+      border-radius: 8px;
+      font-size: 0.8125rem;
+      color: var(--ink-mid);
+      line-height: 1.55;
+    }
+
+    .decision-protects strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    @media (max-width: 860px) {
+      .ds-nav { display: none; }
+      .ds-main { margin-left: 0; }
+      .direction-grid { grid-template-columns: 1fr; }
+      .decision-entry { grid-template-columns: 1fr; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <nav class="ds-nav">
+    <a href="index.html" class="ds-nav-brand">Good Soul<br>Signal Dojo</a>
+    <div class="ds-nav-sub">Design Reference</div>
+    <ul>
+      <li class="ds-nav-section">Live</li>
+      <li><a href="index.html">Brand Position</a></li>
+      <li><a href="directions.html" class="active">Directions &amp; Decisions ←</a></li>
+      <li><a href="design-system.html">Design System</a></li>
+
+      <li class="ds-nav-section">In Development</li>
+      <li><a href="messaging.html" class="ds-nav-stub">Messaging Architecture</a></li>
+      <li><a href="voice.html" class="ds-nav-stub">Voice &amp; Tone</a></li>
+      <li><a href="content-system.html" class="ds-nav-stub">Content System Map</a></li>
+      <li><a href="messaging-reference.html" class="ds-nav-stub">Messaging Reference</a></li>
+      <li><a href="competitive.html" class="ds-nav-stub">Competitive Landscape</a></li>
+      <li><a href="product-architecture.html" class="ds-nav-stub">Product Architecture</a></li>
+
+      <li class="ds-nav-section">On This Page</li>
+      <li><a href="#directions">Brand Expression Directions</a></li>
+      <li><a href="#direction-1">Direction 1 — Rejected</a></li>
+      <li><a href="#direction-2">Direction 2 — Rejected</a></li>
+      <li><a href="#direction-3">Direction 3 — Locked</a></li>
+      <li><a href="#decisions">Design Decision Log</a></li>
+    </ul>
+  </nav>
+
+  <main class="ds-main">
+
+    <!-- COVER -->
+    <div class="ds-cover">
+      <span class="ds-cover-label">Brand Expression Directions &amp; Design Decision Log · April 2026</span>
+      <h1>Why it looks<br>the way it <em>looks.</em></h1>
+      <p class="ds-cover-desc">Three brand expression directions were developed and evaluated. One was selected. Every significant design decision made in this process is documented here with the rationale and what it protects. This record exists so decisions do not get relitigated and so anyone joining the work understands not just what was decided but why.</p>
+      <div class="ds-cover-meta">
+        <div class="ds-cover-meta-item"><strong>Brand</strong>Good Soul / Signal Dojo</div>
+        <div class="ds-cover-meta-item"><strong>Process</strong>Pentagram-method brand expression</div>
+        <div class="ds-cover-meta-item"><strong>Direction Selected</strong>Direction 3 — The Inhabited Tension</div>
+        <div class="ds-cover-meta-item"><strong>Status</strong>Locked — April 2026</div>
+      </div>
+    </div>
+
+    <!-- DIRECTIONS -->
+    <section class="sec warm" id="directions">
+      <div class="ds-wrap">
+        <span class="sec-label">Brand Expression</span>
+        <h2>Three Directions</h2>
+        <p class="sec-desc">All three directions use the same typeface pairing — Fraunces and Assistant — because the Lora/Assistant pairing in the original implementation was already expressing the core tension correctly at the typographic level. What changes across directions is how the two typefaces are weighted, how they relate to each other, and what the color and spatial language does around them.</p>
+
+        <!-- DIRECTION 1 -->
+        <div class="direction-card rejected" id="direction-1">
+          <div class="direction-header">
+            <span class="direction-num">1</span>
+            <div class="direction-title-block">
+              <div class="direction-title">The Philosophical Weight</div>
+              <div class="direction-subtitle">Leans into the depth and gravitas of the inner work. Treats the brand as literature before it treats it as product.</div>
+            </div>
+            <span class="direction-badge badge-rejected">Not Selected</span>
+          </div>
+          <div class="direction-body">
+            <div class="direction-grid">
+              <div>
+                <span class="direction-col-label">What it does</span>
+                <p>Fraunces dominates. Headlines are large, unhurried, set with generous leading. The italic is used with intention, not decoration. Color is restrained — near-black ink on warm white. The violet exists only as punctuation: a single ruled line, a single number, an accent that signals precision without announcing itself. Space is the primary design element. The page feels like a well-considered book, not a website.</p>
+              </div>
+              <div>
+                <span class="direction-col-label">What it produces</span>
+                <p>Immediate felt weight. The person arriving feels the seriousness of the work before reading a word. The philosophical and literary register is high. This direction would serve the Good Soul manuscript well. It would serve a landing page for Heroic-certified coaches less well — they arrive with urgency, not contemplation.</p>
+              </div>
+            </div>
+            <div class="direction-verdict verdict-rejected">
+              <span class="verdict-label">Why Rejected</span>
+              <p class="verdict-text">Too slow for someone arriving in pain and urgency. The diagnosis sections need to move faster than this register allows. The soul layer is present and strong. The signal layer is absent. The tension is not inhabited — it is resolved in one direction. This produces a different brand: a philosophical publishing imprint, not a precision training environment.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- DIRECTION 2 -->
+        <div class="direction-card rejected" id="direction-2">
+          <div class="direction-header">
+            <span class="direction-num">2</span>
+            <div class="direction-title-block">
+              <div class="direction-title">The Precision Instrument</div>
+              <div class="direction-subtitle">Leans into Signal Dojo as an operating system. Product rigor. Structural clarity. The feeling of a tool built by someone who has shipped things.</div>
+            </div>
+            <span class="direction-badge badge-rejected">Not Selected</span>
+          </div>
+          <div class="direction-body">
+            <div class="direction-grid">
+              <div>
+                <span class="direction-col-label">What it does</span>
+                <p>Assistant carries more weight. Headlines can be sans-serif. Fraunces appears in pull quotes, testimonials, and moments of human texture — but the default register is clean and operational. Color is more active: the violet works harder. A structured grid creates visible rhythm. Components feel modular and intentional, like a well-designed dashboard or a physical training apparatus.</p>
+              </div>
+              <div>
+                <span class="direction-col-label">What it produces</span>
+                <p>Immediate credibility with the founder and product-thinking audience. The Danger Room reference lives most naturally here. The person arriving feels they are about to encounter something that actually works. The soul layer is present only in occasional serif moments — it is decoration, not structure.</p>
+              </div>
+            </div>
+            <div class="direction-verdict verdict-rejected">
+              <span class="verdict-label">Why Rejected</span>
+              <p class="verdict-text">High risk of tipping toward the thing the brand must never be: robotic and corporate. The human texture has to be guarded carefully in this direction, and the guard is always at risk of failing. More critically: the signal layer is strong and the soul layer is weak. The tension is resolved in the opposite direction from Direction 1. Both resolving directions are out of brand for the same reason — the tension is not inhabited.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- DIRECTION 3 -->
+        <div class="direction-card" id="direction-3">
+          <div class="direction-header">
+            <span class="direction-num">3</span>
+            <div class="direction-title-block">
+              <div class="direction-title">The Inhabited Tension</div>
+              <div class="direction-subtitle">Does not resolve the tension between Directions 1 and 2. Makes the tension visible and inhabits it. This is the selected direction.</div>
+            </div>
+            <span class="direction-badge badge-locked">Locked</span>
+          </div>
+          <div class="direction-body">
+            <div class="direction-grid">
+              <div>
+                <span class="direction-col-label">What it does</span>
+                <p>Fraunces and Assistant are in genuine dialogue. Neither dominates. The serif carries emotional and philosophical content. The sans carries structural and operational content. The typographic register shifts as the content shifts — and that shift is legible and intentional, not inconsistent. Color has two registers: warm parchment surfaces for inner foundation content, cooler indigo-tint surfaces for system content. Space is asymmetric and alive — it responds to content rather than enforcing a uniform grid.</p>
+              </div>
+              <div>
+                <span class="direction-col-label">What it produces</span>
+                <p>The page feels like it was built by someone who understands both the inner and outer dimensions of the work. The person arriving does not have to choose which version of themselves they are bringing. Both are welcome. The Fortress of Solitude sections get air. The Danger Room sections get density and structure. The navigation and micro-interactions feel considered and calm. Nothing announces itself. Everything serves.</p>
+              </div>
+            </div>
+            <div class="direction-verdict verdict-locked">
+              <span class="verdict-label">Why Selected</span>
+              <p class="verdict-text">This is the only direction that does not resolve the brand's core tension — it inhabits it. The brand position document states this explicitly: the brand does not resolve the inner/outer, soul/signal, stillness/precision tensions. It lives inside them. Direction 3 is the only direction capable of producing that experience. The execution risk is real — inconsistency reads as accident rather than intention if the system is not held tightly — but the design system exists precisely to hold it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DECISION LOG -->
+    <section class="sec white" id="decisions">
+      <div class="ds-wrap">
+        <span class="sec-label">Design Decision Log</span>
+        <h2>Every Significant Decision, Documented.</h2>
+        <p class="sec-desc">In order of the session in which they were made. Each entry records what was decided, what was rejected, the rationale, and what the decision protects. This record is for anyone joining the work — developer, collaborator, future contractor — and for the founder when a decision is under pressure.</p>
+
+        <ul class="decision-log">
+
+          <li class="decision-entry">
+            <div class="decision-meta">
+              <span class="decision-num">Decision 01</span>
+              <div class="decision-title">Brand Expression Direction</div>
+              <span class="decision-status status-locked">Locked</span>
+            </div>
+            <div class="decision-content">
+              <span class="decision-what">Selected</span>
+              <div class="decision-chosen">Direction 3 — The Inhabited Tension</div>
+              <p class="decision-rationale">The only direction that does not resolve the brand's core tension between inner and outer, soul and signal, stillness and precision. Directions 1 and 2 each resolve the tension in one direction — philosophical weight or precision instrument. The brand position document states the tension must be inhabited, not resolved. Only Direction 3 is capable of this.</p>
+              <span class="decision-rejected-label">Rejected</span>
+              <p class="decision-rejected">Direction 1 — The Philosophical Weight. Direction 2 — The Precision Instrument.</p>
+              <div class="decision-protects">
+                <strong>Protects:</strong> The brand's capacity to hold both the Fortress of Solitude and the Danger Room simultaneously. A person arriving for inner foundation work and a person arriving for system execution work must both feel the brand was built for them.
+              </div>
+            </div>
+          </li>
+
+          <li class="decision-entry">
+            <div class="decision-meta">
+              <span class="decision-num">Decision 02</span>
+              <div class="decision-title">Default Surface</div>
+              <span class="decision-status status-locked">Locked</span>
+            </div>
+            <div class="decision-content">
+              <span class="decision-what">Selected</span>
+              <div class="decision-chosen">Warm-primary. Parchment (#F7F5F0) as the default page surface.</div>
+              <p class="decision-rationale">The emotional contract requires safety before capability. A warm surface as the default register communicates welcome before rigor. A dark-primary or cool-primary surface would reverse this — capability and precision would be the first felt experience rather than warmth and recognition. The dark register is reserved for arrival (hero) and departure (final CTA) moments only.</p>
+              <span class="decision-rejected-label">Rejected</span>
+              <p class="decision-rejected">Dark-primary surface. Cool-primary surface. Pure white as default.</p>
+              <div class="decision-protects">
+                <strong>Protects:</strong> The sequence safe → heard → capable. The brand must return to warmth. It cannot live in the dark.
+              </div>
+            </div>
+          </li>
+
+          <li class="decision-entry">
+            <div class="decision-meta">
+              <span class="decision-num">Decision 03</span>
+              <div class="decision-title">Color Direction</div>
+              <span class="decision-status status-locked">Locked</span>
+            </div>
+            <div class="decision-content">
+              <span class="decision-what">Selected</span>
+              <div class="decision-chosen">Direction A — Warmed and deepened indigo. Existing violet retained and adjusted, not replaced.</div>
+              <p class="decision-rationale">The original #6160D8 arrived functionally, not through considered brand decision. Warming it toward indigo adds philosophical weight without losing the precision signal the color needs to carry. Direction B (earth tones, no purple) was rejected because warm neutrals alone drift toward retreat center or wellness brand — the color loses the signal in Signal Dojo. The violet, warmed, keeps both the warmth and the precision. A warm neutral layer (parchment) was added alongside, which was missing from the original implementation.</p>
+              <span class="decision-rejected-label">Rejected</span>
+              <p class="decision-rejected">Direction B — Full palette replacement. Earth tones and cool precision accent. No purple.</p>
+              <div class="decision-protects">
+                <strong>Protects:</strong> The brand's position at the intersection of human development and product precision. Earth tones alone lose the signal. The indigo keeps it.
+              </div>
+            </div>
+          </li>
+
+          <li class="decision-entry">
+            <div class="decision-meta">
+              <span class="decision-num">Decision 04</span>
+              <div class="decision-title">Primary Serif Typeface</div>
+              <span class="decision-status status-locked">Locked</span>
+            </div>
+            <div class="decision-content">
+              <span class="decision-what">Selected</span>
+              <div class="decision-chosen">Fraunces (variable, optical size axis) replaces Lora.</div>
+              <p class="decision-rationale">The selection criterion was: the serif must feel like a considered product, not a literary journal. Lora is one of the most commonly used Google Fonts in the coaching and personal development space — it carries no distinction. Fraunces is a variable font whose optical size axis produces genuine personality at display scale and precise readability at body scale. That range maps directly to the brand's range. Its curved strokes are warm without being decorative. Its structural confidence keeps it from feeling precious.</p>
+              <span class="decision-rejected-label">Rejected</span>
+              <p class="decision-rejected">Lora — too common in this space, insufficient distinction. More literary journal than considered product.</p>
+              <div class="decision-protects">
+                <strong>Protects:</strong> Typographic distinction in a saturated market. Fraunces at large optical sizes has personality that signals this brand was built with intention. Lora at the same scale signals nothing.
+              </div>
+            </div>
+          </li>
+
+          <li class="decision-entry">
+            <div class="decision-meta">
+              <span class="decision-num">Decision 05</span>
+              <div class="decision-title">Primary Sans Typeface</div>
+              <span class="decision-status status-locked">Locked — Provisional</span>
+            </div>
+            <div class="decision-content">
+              <span class="decision-what">Selected</span>
+              <div class="decision-chosen">Assistant retained, provisionally. To be revisited after Fraunces is seen in context.</div>
+              <p class="decision-rationale">Assistant was already in the original implementation and performing its function — clean, operational, readable. The pairing may want something with slightly more character once Fraunces is seen at scale. This is the one decision held open deliberately. The evaluation criterion: does the sans feel like it is in genuine dialogue with Fraunces, or does it feel like a default fallback?</p>
+              <span class="decision-rejected-label">Not Yet Evaluated</span>
+              <p class="decision-rejected">Alternative sans options not yet evaluated. Decision held open pending implementation.</p>
+              <div class="decision-protects">
+                <strong>Protects:</strong> The genuineness of the dialogue between serif and sans. If Assistant reads as a default, the typographic tension becomes one-sided — Fraunces carries all the character and Assistant carries none.
+              </div>
+            </div>
+          </li>
+
+          <li class="decision-entry">
+            <div class="decision-meta">
+              <span class="decision-num">Decision 06</span>
+              <div class="decision-title">Two-Register System</div>
+              <span class="decision-status status-locked">Locked</span>
+            </div>
+            <div class="decision-content">
+              <span class="decision-what">Selected</span>
+              <div class="decision-chosen">Warm register (parchment) for inner foundation content. Cool register (indigo tint) for system and mechanism content.</div>
+              <p class="decision-rationale">The brand position document describes a brand that holds inner and outer in genuine dialogue. The two-register system makes that dialogue visible at the layout level. The surface shifts as the content shifts. A person reading about self-trust and identity is in a different register than a person reading about the three levers and the product prompt sequence. The surface communicates this before the copy does.</p>
+              <span class="decision-rejected-label">Rejected</span>
+              <p class="decision-rejected">Single register throughout. Uniform surface color. No visual distinction between inner and outer content.</p>
+              <div class="decision-protects">
+                <strong>Protects:</strong> The brand's capacity to hold both dimensions simultaneously. A single register would require the copy to carry all the differentiation. The two-register system gives the copy structural support.
+              </div>
+            </div>
+          </li>
+
+          <li class="decision-entry">
+            <div class="decision-meta">
+              <span class="decision-num">Decision 07</span>
+              <div class="decision-title">Dark Surface Usage</div>
+              <span class="decision-status status-locked">Locked</span>
+            </div>
+            <div class="decision-content">
+              <span class="decision-what">Selected</span>
+              <div class="decision-chosen">Dark surface reserved for hero and final CTA only. Ink (#1A1A1A) — warm near-black, not pure black.</div>
+              <p class="decision-rationale">The dark surface creates maximum contrast and urgency. Using it only at arrival (hero) and departure (final CTA) means the brand begins with gravitas, moves through warmth and precision, and arrives at the final decision point with the same gravitas it opened with. The near-black ink value (not pure #000) keeps the warm register consistent even in the dark sections.</p>
+              <span class="decision-rejected-label">Rejected</span>
+              <p class="decision-rejected">Dark surface used throughout. Dark as a primary accent for multiple section types.</p>
+              <div class="decision-protects">
+                <strong>Protects:</strong> The emotional contract. The brand must return to warmth. A page that lives primarily in the dark cannot produce the felt experience of a Japandi training space — it produces a bunker.
+              </div>
+            </div>
+          </li>
+
+          <li class="decision-entry">
+            <div class="decision-meta">
+              <span class="decision-num">Decision 08</span>
+              <div class="decision-title">Fraunces Italic Usage Rule</div>
+              <span class="decision-status status-locked">Locked</span>
+            </div>
+            <div class="decision-content">
+              <span class="decision-what">Selected</span>
+              <div class="decision-chosen">Fraunces italic used once per headline maximum. Accent color (indigo mid) only. Never black or ink.</div>
+              <p class="decision-rationale">Fraunces italic at optical size has genuine personality. That personality is a signal: this phrase is the one that matters. Use it on two phrases in the same headline and it signals nothing. The accent color constraint ensures the italic is a visual event as well as a typographic one — the eye goes there first, and what it finds is the most important phrase on the page.</p>
+              <span class="decision-rejected-label">Rejected</span>
+              <p class="decision-rejected">Multiple italic phrases per headline. Italic used in body text for general emphasis.</p>
+              <div class="decision-protects">
+                <strong>Protects:</strong> The semantic weight of the italic. Once it becomes a general emphasis tool, it loses its ability to mark the single most important phrase.
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <section class="sec dark">
+      <div class="ds-wrap">
+        <p style="font-size:0.875rem;color:rgba(255,255,255,0.5);margin-bottom:8px;">How to use this document</p>
+        <p style="font-size:0.9375rem;color:rgba(255,255,255,0.6);line-height:1.7;max-width:600px;margin-bottom:32px;">When a decision made here comes under pressure — from a collaborator, from a client, from your own uncertainty — return to the rationale column and the protects note. The decision is not arbitrary. It is protecting something specific. Know what it is protecting before changing it.</p>
+        <div style="display:flex;gap:24px;flex-wrap:wrap;padding-top:32px;border-top:1px solid rgba(255,255,255,0.1);">
+          <a href="index.html" style="font-size:0.875rem;color:rgba(255,255,255,0.5);text-decoration:none;">← Brand Position</a>
+          <a href="design-system.html" style="font-size:0.875rem;color:rgba(255,255,255,0.5);text-decoration:none;">Design System →</a>
+        </div>
+        <p style="font-size:0.75rem;color:rgba(255,255,255,0.25);margin-top:24px;">Directions &amp; Decision Log · Good Soul / Signal Dojo · Adrian Cunanan · April 2026</p>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
