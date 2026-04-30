@@ -19,6 +19,319 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,200;1,9..144,300;1,9..144,400;1,9..144,600&family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+
+    /* ── HUB HERO ── */
+    .hub-hero {
+      background: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 88px;
+    }
+
+    .hub-hero-bg {
+      position: absolute; inset: 0;
+      background-image: url("assets/images/hub-hero.jpg");
+      background-size: cover;
+      background-position: 60% 30%;
+      opacity: 0;
+      animation: fadeIn 1.4s ease 0.4s forwards;
+    }
+
+    @media (max-width: 1024px) {
+      .hub-hero-bg { background-position: 70% 25%; }
+    }
+
+    @media (max-width: 768px) {
+      .hub-hero-bg { background-position: 75% 20%; }
+    }
+
+    .hub-hero-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to top, rgba(26,26,26,0.96) 0%, rgba(26,26,26,0.6) 40%, rgba(26,26,26,0.15) 75%, transparent 100%),
+        linear-gradient(to right, rgba(26,26,26,0.5) 0%, transparent 55%),
+        linear-gradient(to bottom, rgba(26,26,26,0.3) 0%, transparent 20%);
+      pointer-events: none;
+    }
+
+    .hub-hero-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 var(--g);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hub-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.25rem, 5.5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--white);
+      margin-bottom: 32px;
+      max-width: 680px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+
+    .hub-hero h1 em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--indigo-mid);
+    }
+
+    .hub-hero-sub {
+      font-family: var(--sans);
+      font-size: clamp(1rem, 1.5vw, 1.125rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.65);
+      max-width: 520px;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+
+    /* ── AUDIENCE CARDS ── */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .audience-card {
+      background: var(--white);
+      border: 1.5px solid var(--rule-warm);
+      border-radius: 14px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      transition: border-color 200ms ease, transform 200ms ease;
+    }
+
+    .audience-card:hover {
+      border-color: var(--indigo);
+      transform: translateY(-2px);
+    }
+
+    .audience-card-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--indigo-mid);
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .audience-card h3 {
+      font-family: var(--serif);
+      font-size: clamp(1.125rem, 2vw, 1.375rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .audience-card p {
+      font-size: 0.9375rem;
+      color: var(--ink-mid);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 24px;
+    }
+
+    .audience-card-cta {
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--indigo);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── SYSTEM TIERS ── */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .tier-card {
+      border-radius: 14px;
+      padding: 32px 28px;
+      border: 1.5px solid var(--rule-cool);
+      background: var(--white);
+    }
+
+    .tier-card.featured {
+      background: var(--indigo);
+      border-color: var(--indigo);
+    }
+
+    .tier-eyebrow {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--indigo-mid);
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .tier-card.featured .tier-eyebrow { color: rgba(255,255,255,0.55); }
+
+    .tier-card h3 {
+      font-family: var(--serif);
+      font-size: clamp(1.125rem, 2vw, 1.375rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .tier-card.featured h3 { color: var(--white); }
+
+    .tier-card p {
+      font-size: 0.9375rem;
+      color: var(--ink-mid);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .tier-card.featured p { color: rgba(255,255,255,0.8); }
+
+    .tier-tag {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--ink-light);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .tier-card.featured .tier-tag { color: rgba(255,255,255,0.5); }
+
+    /* ── FINAL CTA ── */
+    .hub-cta {
+      background: var(--ink);
+      padding: 96px var(--g);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hub-cta::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,72,200,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hub-cta-inner { position: relative; z-index: 1; }
+
+    .hub-cta h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .hub-cta h2 em { font-style: italic; color: var(--indigo-mid); }
+
+    .hub-cta p {
+      font-size: clamp(1rem, 1.5vw, 1.125rem);
+      color: rgba(255,255,255,0.55);
+      max-width: 400px;
+      margin: 0 auto 40px;
+      font-weight: 300;
+    }
+
+    .hub-cta-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-spoke {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--white);
+      background: rgba(255,255,255,0.08);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+      padding: 16px 32px;
+      text-decoration: none;
+      transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-spoke:hover {
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.3);
+      transform: translateY(-1px);
+    }
+
+    .btn-spoke.primary { background: var(--indigo); border-color: var(--indigo); }
+
+    .btn-spoke.primary:hover {
+      background: var(--indigo-deep);
+      border-color: var(--indigo-deep);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .audience-grid   { grid-template-columns: 1fr; }
+      .tier-grid       { grid-template-columns: 1fr; }
+      .hub-cta-buttons { flex-direction: column; align-items: stretch; text-align: center; }
+    }
+
+    /* ── GUIDE SECTION — this page only ──
+       #guide scopes these rules exclusively to the homepage split section.
+       adrian-cunanan-about.jpg: subject seated left of center in frame.
+       35% horizontal pulls frame left to center on subject.
+       20% vertical frames from upper body.
+       Height matches section height to prevent image overflow.
+       No other page uses id="guide" so no scope risk. */
+    #guide {
+      height: calc(100vh - var(--nav-h));
+    }
+
+    #guide .split-photo {
+      height: calc(100vh - var(--nav-h));
+      object-position: 35% 20%;
+    }
+
+    @media (max-width: 700px) {
+      #guide { height: auto; }
+      #guide .split-photo {
+        height: 60vh;
+        object-position: 35% 15%;
+      }
+    }
+
+  </style>
 </head>
 <body>
 
