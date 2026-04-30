@@ -364,11 +364,32 @@
     </div>
   </section>
 
-  <!-- DAY 0 CHANGE 2: Octavio testimonial inserted after Problem section.
-       Proof arrives before the system is introduced and before price is visible.
-       Pull quote leads (fast scan), full quote follows (lean-in reader).
-       Photo pattern matches coaches.html. sec-white maintains section rhythm. -->
-  <section class="sec-white sec-pad-sm">
+  <!-- GUIDE — split-section matching coaches.html Why Trust This pattern.
+       Image left, content right on desktop. Stacked on mobile.
+       adrian-cunanan-about.jpg — object-position: center 15% keeps face in frame.
+       Guide appears before proof: Adrian earns trust, Octavio confirms it. -->
+  <section class="sec-white sec-no-top split-section" id="guide">
+    <img
+      src="assets/images/adrian-cunanan-about.jpg"
+      alt="Adrian Cunanan, founder of Signal Dojo"
+      class="split-photo reveal"
+    />
+    <div class="split-content reveal">
+      <span class="eyebrow">The Guide</span>
+      <h2>Built from inside<br>the <em>gap.</em></h2>
+      <p style="margin-bottom:24px;">I built this because I needed it. Twenty years at the intersection of technology, human performance, and behavioral systems. I went through the Heroic coaching certification and workshop instructor program not to add credentials — but because I needed the framework myself.</p>
+      <p style="margin-bottom:32px;">The gap between knowing and doing is not a motivation problem. It is a system problem. Signal Dojo is that system, built from the inside.</p>
+      <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <a href="https://stan.store/signaldojo/p/signal-dojo-core" class="btn-primary">Get Access</a>
+        <a href="./about.html" style="font-family:var(--sans);font-size:0.875rem;font-weight:600;color:var(--indigo);text-decoration:none;transition:opacity 160ms ease;">Read the full story →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF — Octavio testimonial after Guide.
+       Guide earns credibility first. Proof validates it.
+       Pull quote leads (fast scan), full quote follows (lean-in reader). -->
+  <section class="sec-warm sec-pad-sm">
     <div class="wrap reveal">
       <div style="border-left:3px solid var(--indigo);padding-left:28px;">
         <span class="eyebrow">From Someone Who Has Been Through It</span>
@@ -385,35 +406,6 @@
           <div>
             <span class="attr-name">Octavio Lorenzo</span>
             <span class="attr-role">Certified Heroic Coach and Workshop Instructor, PMP, CSM</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DAY 0 CHANGE 3: Guide block inserted after testimonial, before Who It Serves.
-       Empathy first. Authority second. Two CTAs.
-       Compact for homepage — full story lives on about.html.
-       adrian-cunanan.jpg used — tighter crop, better at 80px circle.
-       object-position: center 15% keeps face in frame at all responsive sizes. -->
-  <section class="sec-warm sec-pad-sm">
-    <div class="wrap reveal">
-      <div class="guide-hub-grid" style="display:grid;grid-template-columns:80px 1fr;gap:32px;align-items:start;">
-        <img
-          src="assets/images/adrian-cunanan.jpg"
-          alt="Adrian Cunanan, founder of Signal Dojo"
-          width="80"
-          height="80"
-          style="width:80px;height:80px;border-radius:50%;object-fit:cover;object-position:center 15%;flex-shrink:0;border:1.5px solid var(--rule-warm);"
-        />
-        <div>
-          <span class="eyebrow">The Guide</span>
-          <p style="font-family:var(--serif);font-size:clamp(1.125rem,2vw,1.375rem);font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:4px;">Adrian Cunanan</p>
-          <span style="font-family:var(--sans);font-size:0.8125rem;color:var(--ink-light);display:block;margin-bottom:16px;">Founder, Signal Dojo / Good Soul</span>
-          <p style="font-size:0.9375rem;color:var(--ink-mid);line-height:1.75;max-width:560px;margin-bottom:24px;">I built this because I needed it. Twenty years at the intersection of technology, human performance, and behavioral systems. Heroic-certified coach and workshop instructor. I know this gap from the inside — not as an observer, but as someone who lived it and built the fix.</p>
-          <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
-            <a href="https://stan.store/signaldojo/p/signal-dojo-core" class="btn-primary" style="display:inline-block;">Get Access</a>
-            <a href="./about.html" style="font-family:var(--sans);font-size:0.875rem;font-weight:600;color:var(--indigo);text-decoration:none;transition:opacity 160ms ease;">Read the full story →</a>
           </div>
         </div>
       </div>
