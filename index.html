@@ -223,6 +223,18 @@
 
     .tier-card.featured .tier-tag { color: rgba(255,255,255,0.5); }
 
+    /* ── SUCCESS STATE ── */
+    .success-close {
+      font-family: var(--serif);
+      font-size: clamp(1.125rem, 2vw, 1.375rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.5;
+      margin-top: 32px;
+      max-width: 560px;
+    }
+
     /* ── FINAL CTA ── */
     .hub-cta {
       background: var(--ink);
@@ -395,9 +407,9 @@
     <div class="split-content reveal">
       <span class="eyebrow">The Guide</span>
       <h2>Built from inside<br>the <em>gap.</em></h2>
-      <p style="margin-bottom:24px;">I built this because I needed it. Twenty years at the intersection of technology, human performance, and behavioral systems. I went through the Heroic coaching certification and workshop instructor program not to add credentials — but because I needed the framework myself.</p>
-      <p style="margin-bottom:32px;">The gap between knowing and doing is not a motivation problem. It is a system problem. Signal Dojo is that system, built from the inside.</p>
-      <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+      <p style="margin-bottom:16px;">I built this because I needed it. Twenty years at the intersection of technology, human performance, and behavioral systems. All of it spent shipping for others.</p>
+      <p style="margin-bottom:24px;">I went through the Heroic coaching certification and workshop instructor program not to collect a credential. I needed to learn to ship myself as the product.</p>
+      <p style="margin-bottom:32px;">The gap between knowing and doing is not a motivation problem. It is a system problem. Signal Dojo is that system, built from the inside.</p><div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
         <a href="https://stan.store/signaldojo/p/signal-dojo-core" class="btn-primary">Get Access</a>
         <a href="./about.html" style="font-family:var(--sans);font-size:0.875rem;font-weight:600;color:var(--indigo);text-decoration:none;transition:opacity 160ms ease;">Read the full story →</a>
       </div>
@@ -461,6 +473,20 @@
           <span class="tier-tag">3-month minimum</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- THE OTHER SIDE — success state.
+       Placed after System and before Proof.
+       Reader sees the mechanism, then the after-state, then confirmation it's real. -->
+  <section class="sec-warm sec-pad">
+    <div class="wrap reveal">
+      <span class="eyebrow">The Other Side</span>
+      <h2>You wake up knowing<br>exactly <em>who you serve.</em></h2>
+      <p style="max-width:580px;margin-top:24px;color:var(--ink-mid);line-height:1.8;">Your message lands the first time you say it. Conversations move because your positioning is clear before you open your mouth. Your offer makes sense to the people you built it for.</p>
+      <p style="max-width:580px;color:var(--ink-mid);line-height:1.8;">You're not wondering where the next client is coming from. You're not opening seventeen tabs trying to figure out what to post. You're not waiting until you feel ready.</p>
+      <p style="max-width:580px;color:var(--ink-mid);line-height:1.8;">You have a foundation. You have a system. You have evidence that it works because you built it yourself.</p>
+      <p class="success-close">That's what's on the other side of five days.</p>
     </div>
   </section>
 
